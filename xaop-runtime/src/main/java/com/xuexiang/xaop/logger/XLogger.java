@@ -20,6 +20,8 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.xuexiang.xaop.util.Strings;
+
 /**
  * <pre>
  *     desc   : XLogger日志记录
@@ -49,6 +51,8 @@ public final class XLogger {
      */
     private static ILogger sILogger = new LogcatLogger();
 
+    private static Strings.ISerializer sISerializer;
+
     private static String sTag = DEFAULT_LOG_TAG;
     /**
      * 是否是调试模式
@@ -67,7 +71,7 @@ public final class XLogger {
      * @param logger
      */
     public static void setLogger(@NonNull ILogger logger) {
-        sILogger = logger;
+        XLogger.sILogger = logger;
     }
 
     /**
@@ -76,7 +80,7 @@ public final class XLogger {
      * @param tag
      */
     public static void setTag(String tag) {
-        sTag = tag;
+        XLogger.sTag = tag;
     }
 
     /**
@@ -85,7 +89,7 @@ public final class XLogger {
      * @param isDebug
      */
     public static void setDebug(boolean isDebug) {
-        sIsDebug = isDebug;
+        XLogger.sIsDebug = isDebug;
     }
 
     /**
@@ -94,7 +98,19 @@ public final class XLogger {
      * @param priority
      */
     public static void setPriority(int priority) {
-        sLogPriority = priority;
+        XLogger.sLogPriority = priority;
+    }
+
+    /**
+     * 设置日志打印时参数序列化的接口方法
+     * @param sISerializer
+     */
+    public static void setISerializer(Strings.ISerializer sISerializer) {
+        XLogger.sISerializer = sISerializer;
+    }
+
+    public static Strings.ISerializer getISerializer() {
+        return sISerializer;
     }
 
     //===================对外接口=======================//
@@ -319,12 +335,31 @@ public final class XLogger {
     }
 
     /**
+     * 打印日志
+     * @param tag
+     * @param msg
+     */
+    public static void log(int priority, String tag, String msg) {
+        if (enableLog(priority)) {
+            sILogger.log(priority, tag, msg, null);
+        }
+    }
+
+    /**
      * 能否打印
      *
      * @param logPriority
      * @return
      */
     private static boolean enableLog(int logPriority) {
-        return sILogger != null && sIsDebug && logPriority >= sLogPriority;
+        return isDebug() && logPriority >= sLogPriority;
+    }
+
+    /**
+     * 当前是否是调试模式
+     * @return
+     */
+    public static boolean isDebug() {
+        return sILogger != null && sIsDebug;
     }
 }

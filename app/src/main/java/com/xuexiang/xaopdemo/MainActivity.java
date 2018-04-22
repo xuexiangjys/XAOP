@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.annotation.Permission;
 import com.xuexiang.xaop.annotation.SingleClick;
 import com.xuexiang.xaop.consts.PermissionConsts;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @SingleClick
-    @Permission(PermissionConsts.CALENDAR)
+    @Permission({PermissionConsts.CALENDAR, PermissionConsts.CAMERA, PermissionConsts.LOCATION})
     private void handleRequestPermission(View v) {
 
     }
@@ -60,5 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void handleOnClick(View v) {
         XLogger.e("点击响应！");
         ToastUtil.get().toast("点击响应！");
+        hello("xuexiangjys", "666666");
+    }
+
+
+    @DebugLog(priority = Log.ERROR)
+    private String hello(String name, String cardId) {
+        return "hello, " + name + "! Your CardId is " + cardId + ".";
     }
 }
