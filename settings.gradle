@@ -1,0 +1,1 @@
+include ':app', ':xaop-plugin', ':xaop-runtime', ':xaop-annotation'
