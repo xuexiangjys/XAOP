@@ -16,30 +16,28 @@
 
 package com.xuexiang.xaop.aspectj;
 
-import android.view.View;
+import android.os.Looper;
 
-import com.xuexiang.xaop.annotation.SingleClick;
 import com.xuexiang.xaop.logger.XLogger;
-import com.xuexiang.xaop.util.ClickUtils;
+import com.xuexiang.xaop.util.AppExecutors;
 import com.xuexiang.xaop.util.Utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.CodeSignature;
 
 /**
  * <pre>
- *     desc   : 防止View被连续点击
+ *     desc   : 主线程切片, 保证注解的方法发生在主线程中
  *     author : xuexiang
- *     time   : 2018/4/22 下午6:38
+ *     time   : 2018/4/23 上午12:33
  * </pre>
  */
 @Aspect
-public class SingleClickAspectJ {
+public class MainThreadAspectJ {
 
-    @Pointcut("within(@com.xuexiang.xaop.annotation.SingleClick *)")
+    @Pointcut("within(@com.xuexiang.xaop.annotation.MainThread *)")
     public void withinAnnotatedClass() {
     }
 
@@ -47,29 +45,27 @@ public class SingleClickAspectJ {
     public void methodInsideAnnotatedType() {
     }
 
-    @Pointcut("execution(@com.xuexiang.xaop.annotation.SingleClick * *(..)) || methodInsideAnnotatedType()")
+    @Pointcut("execution(@com.xuexiang.xaop.annotation.MainThread * *(..)) || methodInsideAnnotatedType()")
     public void method() {
     }  //方法切入点
 
-    @Around("method() && @annotation(singleClick)")//在连接点进行方法替换
-    public void aroundJoinPoint(ProceedingJoinPoint joinPoint, SingleClick singleClick) throws Throwable {
-        View view = null;
-        for (Object arg : joinPoint.getArgs()) {
-            if (arg instanceof View) {
-                view = (View) arg;
-                break;
-            }
-        }
-        if (view != null) {
-            if (!ClickUtils.isFastDoubleClick(view, singleClick.value())) {
-                joinPoint.proceed();//不是快速点击，执行原方法
-            } else {
-                XLogger.i(Utils.getMethodDescribeInfo(joinPoint) + ":发生快速点击，View id:" + view.getId());
-            }
+    @Around("method()")//在连接点进行方法替换
+    public void aroundJoinPoint(final ProceedingJoinPoint joinPoint) throws Throwable {
+        if (Looper.getMainLooper() == Looper.myLooper()) {
+            joinPoint.proceed();
+        } else {
+            XLogger.i(Utils.getMethodDescribeInfo(joinPoint) + " \u21E2 [当前线程]:" + Thread.currentThread().getName() + "，正在切换到主线程！");
+            AppExecutors.get().mainThread().execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        joinPoint.proceed();
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                        XLogger.e(e);
+                    }
+                }
+            });
         }
     }
-
-
-
-
 }

@@ -17,15 +17,12 @@
 package com.xuexiang.xaop.util;
 
 import android.app.Activity;
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -35,9 +32,6 @@ import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xaop.consts.PermissionConsts.Permissions;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -377,21 +371,6 @@ public final class PermissionUtils {
     }
 
     /**
-     * 打开通知权限
-     *
-     * @param activity
-     */
-    public static void requestNotifications(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!isNotificationEnable(activity)) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    openAppNotificationSettings(activity);
-                }
-            }
-        }
-    }
-
-    /**
      * 打开APP的通知权限设置界面
      *
      * @param activity
@@ -404,66 +383,4 @@ public final class PermissionUtils {
         activity.startActivity(intent);
     }
 
-    /**
-     * 通知权限是否打开
-     *
-     * @param context
-     * @return
-     */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private static boolean isNotificationEnable(Context context) {
-        AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
-        ApplicationInfo appInfo = context.getApplicationInfo();
-        String pkg = context.getApplicationContext().getPackageName();
-        int uid = appInfo.uid;
-        try {
-            Class appOpsClass = Class.forName(AppOpsManager.class.getName());
-            Method checkOpNoThrowMethod = appOpsClass.getMethod("checkOpNoThrow", Integer.TYPE, Integer.TYPE,
-                    String.class);
-            Field opPostNotificationValue = appOpsClass.getDeclaredField("OP_POST_NOTIFICATION");
-            int value = (Integer) opPostNotificationValue.get(Integer.class);
-            return ((Integer) checkOpNoThrowMethod.invoke(appOps, value, uid, pkg) == AppOpsManager.MODE_ALLOWED);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    /**
-     * 申请android.permission.SYSTEM_ALERT_WINDOW权限
-     *
-     * @param activity
-     */
-    public static void requestSystemAlertWindow(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(activity)) {
-                Intent serviceIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                        Uri.parse("package:" + activity.getPackageName()));
-                activity.startActivityForResult(serviceIntent, PermissionConsts.REQUEST_OVERLAY_PERMISSION_CODE);
-            }
-        }
-    }
-
-    /**
-     * 申请android.permission.WRITE_SETTINGS权限
-     *
-     * @param activity
-     */
-    public static void requestWriteSettings(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.System.canWrite(activity)) {
-                Intent intent = new Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS,
-                        Uri.parse("package:" + activity.getPackageName()));
-                activity.startActivityForResult(intent, PermissionConsts.REQUEST_WRITE_SETTINGS_PERMISSION_CODE);
-            }
-        }
-    }
 }

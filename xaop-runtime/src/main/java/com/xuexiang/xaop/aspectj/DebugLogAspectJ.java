@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.Strings;
+import com.xuexiang.xaop.util.Utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -98,7 +99,7 @@ public class DebugLogAspectJ {
         //记录并打印方法的信息
         StringBuilder builder = getMethodLogInfo(methodName, parameterNames, parameterValues);
 
-        XLogger.log(debugLog.priority(), getClassName(cls), builder.toString());
+        XLogger.log(debugLog.priority(), Utils.getClassName(cls), builder.toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             final String section = builder.toString().substring(2);
@@ -123,7 +124,7 @@ public class DebugLogAspectJ {
                 builder.append(", ");
             }
             builder.append(parameterNames[i]).append('=');
-            builder.append(toString(parameterValues[i]));
+            builder.append(Utils.toString(parameterValues[i]));
         }
         builder.append(')');
 
@@ -163,10 +164,10 @@ public class DebugLogAspectJ {
 
         if (hasReturnType) {
             builder.append(" = ");
-            builder.append(toString(result));
+            builder.append(Utils.toString(result));
         }
 
-        XLogger.log(debugLog.priority(), getClassName(cls), builder.toString());
+        XLogger.log(debugLog.priority(), Utils.getClassName(cls), builder.toString());
     }
 
     /**
@@ -181,20 +182,6 @@ public class DebugLogAspectJ {
     }
 
 
-    private static String getClassName(Class<?> cls) {
-        if (cls.isAnonymousClass()) {
-            return getClassName(cls.getEnclosingClass());
-        }
-        return cls.getSimpleName();
-    }
-
-    private static String toString(Object object) {
-        if (XLogger.getISerializer() != null) {
-            return XLogger.getISerializer().toString(object);
-        } else {
-            return Strings.toString(object);
-        }
-    }
 
 
 }
