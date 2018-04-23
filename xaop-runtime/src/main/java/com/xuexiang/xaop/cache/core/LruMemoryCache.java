@@ -1,0 +1,110 @@
+/*
+ * Copyright (C) 2018 xuexiangjys(xuexiangjys@163.com)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.xuexiang.xaop.cache.core;
+
+import android.util.LruCache;
+
+import java.lang.reflect.Type;
+
+/**
+ * <pre>
+ *     desc   : 内存缓存实现类
+ *     author : xuexiang
+ *     time   : 2018/4/23 下午10:28
+ * </pre>
+ */
+public class LruMemoryCache extends BaseCache {
+
+    /**
+     * 内存缓存
+     */
+    private LruCache<String, Object> mMemoryCache;
+
+    /**
+     * 初始化内存缓存
+     *
+     * @param cacheSize 最大内存大小
+     */
+    public LruMemoryCache(int cacheSize) {
+        mMemoryCache = new LruCache<>(cacheSize);
+    }
+
+    /**
+     * 是否包含  采用protected修饰符  被子类修改
+     *
+     * @param key
+     */
+    @Override
+    protected boolean doContainsKey(String key) {
+        return mMemoryCache != null && mMemoryCache.get(key) != null;
+    }
+
+    /**
+     * 是否过期(内存缓存一直有效)
+     *
+     * @param key
+     * @param existTime
+     */
+    @Override
+    protected boolean isExpiry(String key, long existTime) {
+        return true;
+    }
+
+    /**
+     * 读取缓存
+     *
+     * @param type
+     * @param key
+     */
+    @Override
+    protected <T> T doLoad(Type type, String key) {
+        if (mMemoryCache == null) {
+            return null;
+        }
+        return (T) mMemoryCache.get(key);
+    }
+
+    /**
+     * 保存
+     *
+     * @param key
+     * @param value
+     */
+    @Override
+    protected <T> boolean doSave(String key, T value) {
+        return mMemoryCache != null && mMemoryCache.put(key, value) != null;
+    }
+
+    /**
+     * 删除缓存
+     *
+     * @param key
+     */
+    @Override
+    protected boolean doRemove(String key) {
+        return mMemoryCache != null && mMemoryCache.remove(key) != null;
+    }
+
+    /**
+     * 清空缓存
+     */
+    @Override
+    protected boolean doClear() {
+        mMemoryCache.evictAll();
+        return true;
+    }
+}

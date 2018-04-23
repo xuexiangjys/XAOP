@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation 'org.aspectj:aspectjrt:1.8.9'
     implementation deps.support.app_compat
+    //磁盘缓存的依赖包
+    implementation 'com.jakewharton:disklrucache:2.0.2'
     api project(':xaop-annotation')
 }
 
