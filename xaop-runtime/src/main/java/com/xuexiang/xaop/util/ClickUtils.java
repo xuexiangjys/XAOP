@@ -27,7 +27,7 @@ import com.xuexiang.xaop.annotation.SingleClick;
  *     time   : 2018/4/22 下午6:47
  * </pre>
  */
-public class ClickUtils {
+public final class ClickUtils {
 
     /**
      * 最近一次点击的时间
@@ -37,6 +37,13 @@ public class ClickUtils {
      * 最近一次点击的控件ID
      */
     private static int sLastClickViewId;
+
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private ClickUtils() {
+        throw new UnsupportedOperationException("Do not need instantiate!");
+    }
 
     /**
      * 是否是快速点击

@@ -31,6 +31,13 @@ import com.xuexiang.xaop.util.Strings;
  */
 public final class XLogger {
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
+    private XLogger() {
+        throw new UnsupportedOperationException("Do not need instantiate!");
+    }
+
     //==============常量================//
     /**
      * 默认tag

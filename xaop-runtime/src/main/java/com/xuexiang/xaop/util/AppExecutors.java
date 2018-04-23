@@ -31,7 +31,7 @@ import java.util.concurrent.Executors;
  *     time   : 2018/4/20 下午4:52
  * </pre>
  */
-public class AppExecutors {
+public final class AppExecutors {
 
     private static AppExecutors sInstance;
 
