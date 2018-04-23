@@ -27,7 +27,7 @@ import java.lang.reflect.Type;
  *     time   : 2018/4/23 下午10:28
  * </pre>
  */
-public class LruMemoryCache extends BaseCache {
+public class LruMemoryCache implements ICache {
 
     /**
      * 内存缓存
@@ -44,34 +44,15 @@ public class LruMemoryCache extends BaseCache {
     }
 
     /**
-     * 是否包含  采用protected修饰符  被子类修改
-     *
-     * @param key
-     */
-    @Override
-    protected boolean doContainsKey(String key) {
-        return mMemoryCache != null && mMemoryCache.get(key) != null;
-    }
-
-    /**
-     * 是否过期(内存缓存一直有效)
-     *
-     * @param key
-     * @param existTime
-     */
-    @Override
-    protected boolean isExpiry(String key, long existTime) {
-        return true;
-    }
-
-    /**
      * 读取缓存
      *
-     * @param type
+     * @param type 对象的类型
      * @param key
+     * @param time 有效期
+     * @return
      */
     @Override
-    protected <T> T doLoad(Type type, String key) {
+    public <T> T load(Type type, String key, long time) {
         if (mMemoryCache == null) {
             return null;
         }
@@ -79,14 +60,26 @@ public class LruMemoryCache extends BaseCache {
     }
 
     /**
-     * 保存
+     * 保存缓存
      *
      * @param key
      * @param value
+     * @return
      */
     @Override
-    protected <T> boolean doSave(String key, T value) {
+    public <T> boolean save(String key, T value) {
         return mMemoryCache != null && mMemoryCache.put(key, value) != null;
+    }
+
+    /**
+     * 是否包含
+     *
+     * @param key
+     * @return
+     */
+    @Override
+    public boolean containsKey(String key) {
+        return mMemoryCache != null && mMemoryCache.get(key) != null;
     }
 
     /**
@@ -95,7 +88,7 @@ public class LruMemoryCache extends BaseCache {
      * @param key
      */
     @Override
-    protected boolean doRemove(String key) {
+    public boolean remove(String key) {
         return mMemoryCache != null && mMemoryCache.remove(key) != null;
     }
 
@@ -103,8 +96,11 @@ public class LruMemoryCache extends BaseCache {
      * 清空缓存
      */
     @Override
-    protected boolean doClear() {
-        mMemoryCache.evictAll();
-        return true;
+    public boolean clear() {
+        if (mMemoryCache != null) {
+            mMemoryCache.evictAll();
+            return true;
+        }
+        return false;
     }
 }

@@ -17,8 +17,10 @@
 package com.xuexiang.xaopdemo;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.xuexiang.xaop.XAOP;
+import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils;
 import com.xuexiang.xaop.util.Utils;
 import com.xuexiang.xutil.XUtil;
@@ -42,6 +44,7 @@ public class App extends Application {
 
         XAOP.init(this);
         XAOP.debug(true);
+        XLogger.setPriority(Log.INFO);
         XAOP.setOnPermissionDeniedListener(new PermissionUtils.OnPermissionDeniedListener() {
             /**
              * 权限申请被拒绝

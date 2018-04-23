@@ -25,7 +25,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  *
  * <pre>
- *     desc   : <p>描述：缓存的基类</p>
+ *     desc   : <p>描述：磁盘缓存的基类</p>
  *              1.所有缓存处理都继承该基类<br>
  *              2.增加了锁机制，防止频繁读取缓存造成的异常。<br>
  *              3.子类直接考虑具体的实现细节就可以了。<br>
@@ -34,7 +34,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  *     time   : 2018/4/23 下午9:59
  * </pre>
  */
-public abstract class BaseCache implements ICache {
+public abstract class BaseDiskCache implements ICache {
 
     private final ReadWriteLock mLock = new ReentrantReadWriteLock();
 

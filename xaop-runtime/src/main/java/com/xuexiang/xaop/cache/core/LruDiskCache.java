@@ -34,7 +34,7 @@ import java.lang.reflect.Type;
  *     time   : 2018/4/23 下午10:06
  * </pre>
  */
-public class LruDiskCache extends BaseCache {
+public class LruDiskCache extends BaseDiskCache {
     /**
      * 磁盘转化器
      */

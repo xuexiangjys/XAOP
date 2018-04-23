@@ -54,13 +54,10 @@ public class CacheCore implements ICache {
      */
     @Override
     public <T> T load(Type type, String key, long time) {
-        String cacheKey = MD5Utils.encode(key);
-        XLogger.d("loadCache  key=" + cacheKey);
         if (mCache != null) {
-            T result = mCache.load(type, cacheKey, time);
-            if (result != null) {
-                return result;
-            }
+            String cacheKey = MD5Utils.encode(key);
+            XLogger.d("loadCache  key=" + cacheKey);
+            return mCache.load(type, cacheKey, time);
         }
         return null;
     }
@@ -70,9 +67,12 @@ public class CacheCore implements ICache {
      */
     @Override
     public <T> boolean save(String key, T value) {
-        String cacheKey = MD5Utils.encode(key);
-        XLogger.d("saveCache  key=" + cacheKey);
-        return mCache.save(cacheKey, value);
+        if (mCache != null) {
+            String cacheKey = MD5Utils.encode(key);
+            XLogger.d("saveCache  key=" + cacheKey);
+            return mCache.save(cacheKey, value);
+        }
+        return false;
     }
 
     /**
@@ -83,12 +83,10 @@ public class CacheCore implements ICache {
      */
     @Override
     public boolean containsKey(String key) {
-        String cacheKey = MD5Utils.encode(key);
-        XLogger.d("containsCache  key=" + cacheKey);
         if (mCache != null) {
-            if (mCache.containsKey(cacheKey)) {
-                return true;
-            }
+            String cacheKey = MD5Utils.encode(key);
+            XLogger.d("containsCache  key=" + cacheKey);
+            return mCache.containsKey(cacheKey);
         }
         return false;
     }

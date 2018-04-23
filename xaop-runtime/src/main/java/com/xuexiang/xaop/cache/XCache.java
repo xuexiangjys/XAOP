@@ -25,7 +25,6 @@ import com.xuexiang.xaop.cache.converter.SerializableDiskConverter;
 import com.xuexiang.xaop.cache.core.CacheCore;
 import com.xuexiang.xaop.cache.core.LruDiskCache;
 import com.xuexiang.xaop.cache.core.LruMemoryCache;
-import com.xuexiang.xaop.util.AppExecutors;
 import com.xuexiang.xaop.util.Utils;
 
 import java.io.File;
@@ -39,8 +38,6 @@ import java.lang.reflect.Type;
  * </pre>
  */
 public class XCache {
-    private static XCache sInstance;
-
     /**
      * 缓存的核心管理类
      */
@@ -50,11 +47,15 @@ public class XCache {
      */
     private long mCacheTime;
 
-    private XCache() {
-        this(new Builder());
+    public static XCache newInstance() {
+        return new XCache();
     }
 
-    private XCache(Builder builder) {
+    public XCache() {
+        this(new Builder().builder());
+    }
+
+    public XCache(Builder builder) {
         init(builder);
     }
 
@@ -73,23 +74,6 @@ public class XCache {
         }
         return this;
     }
-
-    /**
-     * 获取线程管理实例
-     *
-     * @return
-     */
-    public static XCache get() {
-        if (sInstance == null) {
-            synchronized (XCache.class) {
-                if (sInstance == null) {
-                    sInstance = new XCache();
-                }
-            }
-        }
-        return sInstance;
-    }
-
 
     /**
      * 读取缓存
@@ -150,6 +134,10 @@ public class XCache {
      */
     public boolean clear() {
         return mCacheCore.clear();
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     /**
@@ -254,7 +242,11 @@ public class XCache {
             return this;
         }
 
-        public XCache build() {
+        /**
+         * 构建属性
+         * @return
+         */
+        public Builder builder() {
             if (isDiskCache) { //初始化磁盘缓存的属性
                 if (this.diskConverter == null) {
                     this.diskConverter = new SerializableDiskConverter();
@@ -277,7 +269,11 @@ public class XCache {
                     memoryMaxSize = (int) (Runtime.getRuntime().maxMemory() / 1024) / 8;
                 }
             }
-            return new XCache(this);
+            return this;
+        }
+
+        public XCache build() {
+            return new XCache(builder());
         }
 
         private static long calculateDiskCacheSize(File dir) {

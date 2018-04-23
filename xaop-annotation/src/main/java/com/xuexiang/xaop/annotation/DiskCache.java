@@ -23,13 +23,13 @@ import java.lang.annotation.Target;
 
 /**
  * <pre>
- *     desc   : 缓存代理注解，通过aop切片的方式在编译期间织入源代码中
+ *     desc   : 磁盘缓存代理注解，通过aop切片的方式在编译期间织入源代码中
  *              <p>功能：缓存某方法的返回值，下次执行该方法时，直接从缓存里获取。</p>
  *     author : xuexiang
- *     time   : 2018/4/23 下午9:23
+ *     time   : 2018/4/23 下午11:50
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Cache {
+public @interface DiskCache {
 }
