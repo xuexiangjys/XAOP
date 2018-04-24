@@ -3,12 +3,6 @@
 
 [![xaop][xaopsvg]][xaop]  [![api][apisvg]][api]
 
-
-
-[TOC]
-
-
-
 ## 关于我
 
 [![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)
