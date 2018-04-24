@@ -22,6 +22,7 @@ import android.content.Context;
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
+import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils.OnPermissionDeniedListener;
 
@@ -36,10 +37,19 @@ public final class XAOP {
 
     private static Context sContext;
 
-    private static OnPermissionDeniedListener mOnPermissionDeniedListener;
+    /**
+     * 权限申请被拒绝的监听
+     */
+    private static OnPermissionDeniedListener sOnPermissionDeniedListener;
+
+    /**
+     * 自定义拦截切片的拦截器接口
+     */
+    private static Interceptor sInterceptor;
 
     /**
      * 初始化
+     *
      * @param application
      */
     public static void init(Application application) {
@@ -48,6 +58,7 @@ public final class XAOP {
 
     /**
      * 获取全局上下文
+     *
      * @return
      */
     public static Context getContext() {
@@ -61,12 +72,30 @@ public final class XAOP {
         }
     }
 
+    /**
+     * 设置权限申请被拒绝的监听
+     *
+     * @param listener 权限申请被拒绝的监听器
+     */
     public static void setOnPermissionDeniedListener(OnPermissionDeniedListener listener) {
-        XAOP.mOnPermissionDeniedListener = listener;
+        XAOP.sOnPermissionDeniedListener = listener;
     }
 
     public static OnPermissionDeniedListener getOnPermissionDeniedListener() {
-        return mOnPermissionDeniedListener;
+        return sOnPermissionDeniedListener;
+    }
+
+    /**
+     * 设置自定义拦截切片的拦截器接口
+     *
+     * @param sInterceptor 自定义拦截切片的拦截器接口
+     */
+    public static void setInterceptor(Interceptor sInterceptor) {
+        XAOP.sInterceptor = sInterceptor;
+    }
+
+    public static Interceptor getInterceptor() {
+        return sInterceptor;
     }
 
     /**
@@ -89,6 +118,7 @@ public final class XAOP {
 
     /**
      * 初始化内存缓存
+     *
      * @param memoryMaxSize
      */
     public static void initMemoryCache(int memoryMaxSize) {
@@ -97,9 +127,12 @@ public final class XAOP {
 
     /**
      * 初始化磁盘缓存
+     *
      * @param builder
      */
     public static void initDiskCache(XCache.Builder builder) {
         XDiskCache.getInstance().init(builder);
     }
+
+
 }

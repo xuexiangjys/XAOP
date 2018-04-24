@@ -363,6 +363,9 @@ public final class PermissionUtils {
         void onActivityCreate(Activity activity);
     }
 
+    /**
+     * 权限申请被拒绝的监听
+     */
     public interface OnPermissionDeniedListener {
         /**
          * 权限申请被拒绝

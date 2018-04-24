@@ -37,10 +37,11 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 埋点记录
- *
- * @author xuexiang
- * @date 2018/4/7 下午6:01
+ * <pre>
+ *     desc   : 埋点记录
+ *     author : xuexiang
+ *     time   : 2018/4/24 下午10:01
+ * </pre>
  */
 @Aspect
 public class DebugLogAspectJ {

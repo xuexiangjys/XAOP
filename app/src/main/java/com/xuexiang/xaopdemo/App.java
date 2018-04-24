@@ -20,11 +20,14 @@ import android.app.Application;
 import android.util.Log;
 
 import com.xuexiang.xaop.XAOP;
+import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils;
 import com.xuexiang.xaop.util.Utils;
 import com.xuexiang.xutil.XUtil;
 import com.xuexiang.xutil.tip.ToastUtil;
+
+import org.aspectj.lang.JoinPoint;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class App extends Application {
 
         XAOP.init(this);
         XAOP.debug(true);
-        XLogger.setPriority(Log.INFO);
+//        XLogger.setPriority(Log.INFO);
         XAOP.setOnPermissionDeniedListener(new PermissionUtils.OnPermissionDeniedListener() {
             /**
              * 权限申请被拒绝
@@ -56,6 +59,23 @@ public class App extends Application {
                 ToastUtil.get().toast("权限申请被拒绝:" + Utils.listToString(permissionsDenied));
             }
 
+        });
+
+        XAOP.setInterceptor(new Interceptor() {
+            @Override
+            public boolean intercept(int type, JoinPoint joinPoint) throws Throwable {
+                XLogger.d("正在进行拦截，拦截类型:" + type);
+                switch(type) {
+                    case 1:
+                        //做你想要的拦截
+                        break;
+                    case 2:
+                        return true; //return true，直接拦截切片的执行
+                    default:
+                        break;
+                }
+                return false;
+            }
         });
     }
 }

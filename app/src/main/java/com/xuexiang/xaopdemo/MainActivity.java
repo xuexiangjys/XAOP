@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.annotation.DiskCache;
 import com.xuexiang.xaop.annotation.IOThread;
+import com.xuexiang.xaop.annotation.Intercept;
 import com.xuexiang.xaop.annotation.MainThread;
 import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.annotation.Permission;
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @SingleClick(5000)
+    @DebugLog(priority = Log.ERROR)
+    @Intercept(3)
     public void handleOnClick(View v) {
         XLogger.e("点击响应！");
         ToastUtil.get().toast("点击响应！");
@@ -87,7 +90,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     @DebugLog(priority = Log.ERROR)
-    @MemoryCache
+    @Intercept({1,2,3})
+//    @MemoryCache
 //    @DiskCache
     private String hello(String name, String cardId) {
         return "hello, " + name + "! Your CardId is " + cardId + ".";
