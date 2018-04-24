@@ -36,6 +36,10 @@ import java.lang.reflect.Type;
  */
 public class LruDiskCache extends BaseDiskCache {
     /**
+     * 永久不过期
+     */
+    public static final long CACHE_NEVER_EXPIRE = -1;
+    /**
      * 磁盘转化器
      */
     private IDiskConverter mDiskConverter;
@@ -156,7 +160,7 @@ public class LruDiskCache extends BaseDiskCache {
         if (mDiskLruCache == null) {
             return false;
         }
-        if (existTime > -1) {//-1表示永久性存储 不用进行过期校验
+        if (existTime > CACHE_NEVER_EXPIRE) {//-1表示永久性存储 不用进行过期校验
             //为什么这么写，请了解DiskLruCache，看它的源码
             File file = new File(mDiskLruCache.getDirectory(), key + "." + 0);
             if (isCacheDataFailure(file, existTime)) {//没有获取到缓存,或者缓存已经过期!

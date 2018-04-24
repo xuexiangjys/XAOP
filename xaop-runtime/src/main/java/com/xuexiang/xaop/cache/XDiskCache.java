@@ -16,33 +16,35 @@
 
 package com.xuexiang.xaop.cache;
 
+import java.lang.reflect.Type;
+
 /**
  * <pre>
- *     desc   : 内存缓存管理器
+ *     desc   : 磁盘缓存管理器
  *     author : xuexiang
- *     time   : 2018/4/23 下午11:59
+ *     time   : 2018/4/24 上午9:26
  * </pre>
  */
-public final class XMemoryCache {
+public final class XDiskCache {
 
-    private static XMemoryCache sInstance;
+    private static XDiskCache sInstance;
 
     private XCache mXCache;
 
-    private XMemoryCache() {
-        mXCache = XCache.newInstance();
+    private XDiskCache() {
+        mXCache = XCache.newBuilder().isDiskCache(true).build();
     }
 
     /**
-     * 获取内存缓存管理实例
+     * 获取磁盘缓存管理实例
      *
      * @return
      */
-    public static XMemoryCache getInstance() {
+    public static XDiskCache getInstance() {
         if (sInstance == null) {
-            synchronized (XMemoryCache.class) {
+            synchronized (XDiskCache.class) {
                 if (sInstance == null) {
-                    sInstance = new XMemoryCache();
+                    sInstance = new XDiskCache();
                 }
             }
         }
@@ -50,12 +52,12 @@ public final class XMemoryCache {
     }
 
     /**
-     * 初始化内存缓存
-     * @param memoryMaxSize
+     * 初始化磁盘缓存
+     * @param builder
      * @return
      */
-    public XMemoryCache init(int memoryMaxSize) {
-        mXCache.init(XCache.newBuilder().memoryMaxSize(memoryMaxSize));
+    public XDiskCache init(XCache.Builder builder) {
+        mXCache.init(builder);
         return this;
     }
 
@@ -66,6 +68,27 @@ public final class XMemoryCache {
      */
     public <T> T load(final String key) {
         return mXCache.load(key);
+    }
+
+    /**
+     * 读取缓存
+     *
+     * @param key  缓存key
+     * @param time 保存时间
+     */
+    public <T> T load(final String key, final long time) {
+        return mXCache.load(key, time);
+    }
+
+    /**
+     * 读取缓存
+     *
+     * @param type 保存的类型
+     * @param key  缓存key
+     * @param time 保存时间
+     */
+    public <T> T load(final Type type, final String key, final long time) {
+        return mXCache.load(type, key, time);
     }
 
     /**

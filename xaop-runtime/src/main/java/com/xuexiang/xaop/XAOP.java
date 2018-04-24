@@ -19,6 +19,9 @@ package com.xuexiang.xaop;
 import android.app.Application;
 import android.content.Context;
 
+import com.xuexiang.xaop.cache.XCache;
+import com.xuexiang.xaop.cache.XDiskCache;
+import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils.OnPermissionDeniedListener;
 
@@ -84,4 +87,19 @@ public final class XAOP {
         XLogger.debug(tag);
     }
 
+    /**
+     * 初始化内存缓存
+     * @param memoryMaxSize
+     */
+    public static void initMemoryCache(int memoryMaxSize) {
+        XMemoryCache.getInstance().init(memoryMaxSize);
+    }
+
+    /**
+     * 初始化磁盘缓存
+     * @param builder
+     */
+    public static void initDiskCache(XCache.Builder builder) {
+        XDiskCache.getInstance().init(builder);
+    }
 }

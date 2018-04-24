@@ -146,7 +146,6 @@ public class XCache {
     public static final class Builder {
         private static final int MIN_DISK_CACHE_SIZE = 5 * 1024 * 1024; // 5MB
         private static final int MAX_DISK_CACHE_SIZE = 50 * 1024 * 1024; // 50MB
-        public static final long CACHE_NEVER_EXPIRE = -1;//永久不过期
         private boolean isDiskCache;
         //构建内存缓存需要的属性
         private int memoryMaxSize;
@@ -166,7 +165,7 @@ public class XCache {
             this.isDiskCache = false;
             this.context = context;
             this.diskConverter = new SerializableDiskConverter();
-            this.cacheTime = CACHE_NEVER_EXPIRE;
+            this.cacheTime = LruDiskCache.CACHE_NEVER_EXPIRE;
             this.appVersion = Utils.getAppVersionCode(context);
         }
 
@@ -261,7 +260,7 @@ public class XCache {
                 if (diskMaxSize <= 0) {
                     diskMaxSize = calculateDiskCacheSize(diskDir);
                 }
-                cacheTime = Math.max(CACHE_NEVER_EXPIRE, this.cacheTime);
+                cacheTime = Math.max(LruDiskCache.CACHE_NEVER_EXPIRE, this.cacheTime);
 
                 appVersion = Math.max(Utils.getAppVersionCode(this.context), this.appVersion);
             } else { //初始化内存缓存的属性

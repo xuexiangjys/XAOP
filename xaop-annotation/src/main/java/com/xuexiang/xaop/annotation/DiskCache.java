@@ -32,4 +32,15 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface DiskCache {
+    /**
+     * 缓存的key
+     * @return
+     */
+    String value() default "";
+
+    /**
+     * 缓存时间
+     * @return
+     */
+    long cacheTime() default -1;
 }

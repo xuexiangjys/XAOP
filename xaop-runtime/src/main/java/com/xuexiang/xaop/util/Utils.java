@@ -20,11 +20,14 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import com.xuexiang.xaop.logger.XLogger;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.CodeSignature;
+import org.aspectj.lang.reflect.MethodSignature;
 
 import java.io.Closeable;
 import java.io.File;
@@ -166,6 +169,37 @@ public final class Utils {
             }
         }
         return -1;
+    }
+
+    /**
+     * 获取缓存的key
+     * <p>key规则 ： 方法名＋参数1+参数2+...</p>
+     *
+     * @param joinPoint
+     * @return
+     */
+    @NonNull
+    public static String getCacheKey(ProceedingJoinPoint joinPoint) {
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+        String methodName = methodSignature.getName();
+        StringBuilder keyBuilder = new StringBuilder();
+        keyBuilder.append(methodName);
+        for (Object obj : joinPoint.getArgs()) {
+            if (obj instanceof String) keyBuilder.append((String) obj);
+            else if (obj instanceof Class) keyBuilder.append(((Class) obj).getSimpleName());
+        }
+        return keyBuilder.toString();
+    }
+
+    /**
+     * 方法是否有返回值
+     *
+     * @param signature
+     * @return
+     */
+    public static boolean isHasReturnType(Signature signature) {
+        return signature instanceof MethodSignature
+                && ((MethodSignature) signature).getReturnType() != void.class;
     }
 
 }

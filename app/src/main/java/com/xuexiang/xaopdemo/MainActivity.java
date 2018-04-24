@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.xuexiang.xaop.annotation.DebugLog;
+import com.xuexiang.xaop.annotation.DiskCache;
 import com.xuexiang.xaop.annotation.IOThread;
 import com.xuexiang.xaop.annotation.MainThread;
 import com.xuexiang.xaop.annotation.MemoryCache;
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @DebugLog(priority = Log.ERROR)
     @MemoryCache
+//    @DiskCache
     private String hello(String name, String cardId) {
         return "hello, " + name + "! Your CardId is " + cardId + ".";
     }
@@ -98,7 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @IOThread(ThreadType.Single)
-    @MemoryCache
+    @MemoryCache("12345")
+//    @DiskCache
     private String doInIOThread(View v) {
         return "io线程名:" + Thread.currentThread().getName();
     }

@@ -154,7 +154,7 @@ public class DebugLogAspectJ {
         Class<?> cls = signature.getDeclaringType();
         String methodName = signature.getName();
 
-        boolean hasReturnType = isHasReturnType(signature);
+        boolean hasReturnType = Utils.isHasReturnType(signature);
 
         StringBuilder builder = new StringBuilder("\u21E0 ")
                 .append(methodName)
@@ -168,17 +168,6 @@ public class DebugLogAspectJ {
         }
 
         XLogger.log(debugLog.priority(), Utils.getClassName(cls), builder.toString());
-    }
-
-    /**
-     * 方法是否有返回值
-     *
-     * @param signature
-     * @return
-     */
-    private boolean isHasReturnType(Signature signature) {
-        return signature instanceof MethodSignature
-                && ((MethodSignature) signature).getReturnType() != void.class;
     }
 
 

@@ -54,7 +54,7 @@ public class MainThreadAspectJ {
         if (Looper.getMainLooper() == Looper.myLooper()) {
             joinPoint.proceed();
         } else {
-            XLogger.i(Utils.getMethodDescribeInfo(joinPoint) + " \u21E2 [当前线程]:" + Thread.currentThread().getName() + "，正在切换到主线程！");
+            XLogger.d(Utils.getMethodDescribeInfo(joinPoint) + " \u21E2 [当前线程]:" + Thread.currentThread().getName() + "，正在切换到主线程！");
             AppExecutors.get().mainThread().execute(new Runnable() {
                 @Override
                 public void run() {

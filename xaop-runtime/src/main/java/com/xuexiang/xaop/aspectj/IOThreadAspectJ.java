@@ -58,7 +58,7 @@ public class IOThreadAspectJ {
         if (Looper.getMainLooper() != Looper.myLooper()) {
             return joinPoint.proceed();
         } else {
-            XLogger.i(Utils.getMethodDescribeInfo(joinPoint) + " \u21E2 [当前线程]:" + Thread.currentThread().getName() + "，正在切换到子线程！");
+            XLogger.d(Utils.getMethodDescribeInfo(joinPoint) + " \u21E2 [当前线程]:" + Thread.currentThread().getName() + "，正在切换到子线程！");
             Object result = null;
             switch(ioThread.value()) {
                 case Single:
@@ -80,7 +80,7 @@ public class IOThreadAspectJ {
                     }).get();
                     break;
             }
-            XLogger.i(Utils.getMethodDescribeInfo(joinPoint) + " \u21E0 [执行结果]:" + Utils.toString(result));
+            XLogger.d(Utils.getMethodDescribeInfo(joinPoint) + " \u21E0 [执行结果]:" + Utils.toString(result));
             return result;
         }
     }
