@@ -32,12 +32,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface Intercept {
     /**
-     * 默认不拦截
-     */
-    int NO_INTERCEPT = -1;
-
-    /**
      * 拦截类型
      */
-    int[] value() default NO_INTERCEPT;
+    int[] value();
 }

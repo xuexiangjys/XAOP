@@ -58,22 +58,11 @@ public class InterceptAspectJ {
 
     @Around("(method() || constructor()) && @annotation(intercept)")
     public Object aroundJoinPoint(ProceedingJoinPoint joinPoint, Intercept intercept) throws Throwable {
-        if (isNoNeedIntercept(intercept)) return joinPoint.proceed();
+        if (XAOP.getInterceptor() == null) return joinPoint.proceed(); //没有拦截器不执行切片拦截
         //执行拦截操作
         boolean result = proceedIntercept(intercept.value(), joinPoint);
         XLogger.d("拦截结果:" + result + ", 切片" + (result ? "被拦截！" : "正常执行！"));
         return result ? null : joinPoint.proceed();
-    }
-
-    /**
-     * 是否不需要进行拦截
-     *
-     * @param intercept
-     * @return
-     */
-    private boolean isNoNeedIntercept(Intercept intercept) {
-        return (intercept.value().length == 1 && intercept.value()[0] == Intercept.NO_INTERCEPT)
-                || XAOP.getInterceptor() == null;
     }
 
     /**

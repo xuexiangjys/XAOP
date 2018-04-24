@@ -47,7 +47,7 @@ public class App extends Application {
 
         XAOP.init(this);
         XAOP.debug(true);
-//        XLogger.setPriority(Log.INFO);
+//        XAOP.setPriority(Log.INFO);
         XAOP.setOnPermissionDeniedListener(new PermissionUtils.OnPermissionDeniedListener() {
             /**
              * 权限申请被拒绝

@@ -18,13 +18,16 @@ package com.xuexiang.xaop;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.checker.Interceptor;
+import com.xuexiang.xaop.logger.ILogger;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils.OnPermissionDeniedListener;
+import com.xuexiang.xaop.util.Strings;
 
 /**
  * <pre>
@@ -72,6 +75,7 @@ public final class XAOP {
         }
     }
 
+    //============动态申请权限失败事件设置=============//
     /**
      * 设置权限申请被拒绝的监听
      *
@@ -85,6 +89,7 @@ public final class XAOP {
         return sOnPermissionDeniedListener;
     }
 
+    //============自定义拦截器设置=============//
     /**
      * 设置自定义拦截切片的拦截器接口
      *
@@ -98,6 +103,7 @@ public final class XAOP {
         return sInterceptor;
     }
 
+    //============日志打印设置=============//
     /**
      * 设置是否打开调试
      *
@@ -116,6 +122,34 @@ public final class XAOP {
         XLogger.debug(tag);
     }
 
+    /**
+     * 设置打印日志的等级（只打印改等级以上的日志）
+     *
+     * @param priority
+     */
+    public static void setPriority(int priority) {
+        XLogger.setPriority(priority);
+    }
+
+    /**
+     * 设置日志打印时参数序列化的接口方法
+     *
+     * @param sISerializer
+     */
+    public static void setISerializer(Strings.ISerializer sISerializer) {
+        XLogger.setISerializer(sISerializer);
+    }
+
+    /**
+     * 设置日志记录者的接口
+     *
+     * @param logger
+     */
+    public static void setLogger(@NonNull ILogger logger) {
+        XLogger.setLogger(logger);
+    }
+
+    //============缓存设置=============//
     /**
      * 初始化内存缓存
      *
