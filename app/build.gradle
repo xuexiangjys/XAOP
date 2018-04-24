@@ -16,7 +16,7 @@
 
 apply plugin: 'com.android.application'
 
-//apply plugin: 'com.xuexiang.xaop'
+apply plugin: 'com.xuexiang.xaop'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -41,6 +41,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.support.app_compat
-    implementation project(':xaop-runtime')
+//    implementation project(':xaop-runtime')
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.0'
+
     implementation 'com.github.xuexiangjys:XUtil:1.0.0'
 }

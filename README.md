@@ -64,7 +64,6 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
     implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.0'  //添加依赖
-    implementation 'com.jakewharton:disklrucache:2.0.2' //如果用到磁盘缓存的话
 }
 
 ```
