@@ -25,6 +25,8 @@
 
 * 支持自定义拦截切片`@Intercept`，支持自定义切片拦截。
 
+* 兼容Kotlin语法。
+
 ## 1、演示（请star支持）
 
 ![](https://github.com/xuexiangjys/XAOP/blob/master/img/aop.gif)
@@ -103,6 +105,29 @@ XAOP.setInterceptor(new Interceptor() {
 });
 
 ```
+
+### 2.2、兼容Kotlin语法配置
+
+1.在项目根目录的 build.gradle 的 dependencies 添加aspectjx插件：
+
+```
+buildscript {
+    ···
+    dependencies {
+        ···
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+    }
+}
+```
+
+2.在项目的 build.gradle 中增加依赖并引用aspectjx插件
+
+```
+apply plugin: 'android-aspectjx' //引用aspectjx插件
+
+```
+
+详细使用可参见kotlin-test项目进行使用.
 
 ## 3、切片的使用
 
