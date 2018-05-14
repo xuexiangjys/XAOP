@@ -33,14 +33,12 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface DiskCache {
     /**
-     * 缓存的key
-     * @return
+     * @return 缓存的key
      */
     String value() default "";
 
     /**
-     * 缓存时间
-     * @return
+     * @return 缓存时间
      */
     long cacheTime() default -1;
 }

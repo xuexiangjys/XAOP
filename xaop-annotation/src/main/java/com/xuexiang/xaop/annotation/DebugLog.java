@@ -30,7 +30,7 @@ import java.lang.annotation.Target;
 public @interface DebugLog {
 
     /**
-     * 日志的优先级(默认是0)
+     * @return 日志的优先级(默认是0)
      */
     int priority() default 0;
 }

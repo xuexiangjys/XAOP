@@ -99,6 +99,19 @@ public final class Utils {
         return Utils.getClassName(cls) + "->" + methodName;
     }
 
+    /**
+     * 获取简约的方法名
+     *
+     * @param joinPoint
+     * @return
+     */
+    public static String getMethodName(final ProceedingJoinPoint joinPoint) {
+        CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
+        Class<?> cls = codeSignature.getDeclaringType(); //方法所在类
+        String methodName = codeSignature.getName();    //方法名
+        return Utils.getClassName(cls) + "." + methodName;
+    }
+
     public static <T> T checkNotNull(T t, String message) {
         if (t == null) {
             throw new NullPointerException(message);

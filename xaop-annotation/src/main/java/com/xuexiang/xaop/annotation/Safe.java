@@ -23,16 +23,17 @@ import java.lang.annotation.Target;
 
 /**
  * <pre>
- *     desc   : 申请系统权限注解
+ *     desc   : 自动try-catch的注解
  *     author : xuexiang
- *     time   : 2018/4/22 下午6:34
+ *     time   : 2018/5/14 下午10:33
  * </pre>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.PARAMETER})
-public @interface Permission {
+@Target(ElementType.METHOD)
+public @interface Safe {
+
     /**
-     * @return 需要申请权限的集合
+     * @return flag 捕获异常的标志
      */
-    String[] value();
+    String value() default "";
 }

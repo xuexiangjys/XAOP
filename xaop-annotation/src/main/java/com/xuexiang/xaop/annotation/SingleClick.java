@@ -35,7 +35,7 @@ public @interface SingleClick {
     long DEFAULT_INTERVAL_MILLIS = 1000;
 
     /**
-     * 快速点击的间隔（ms），默认是1000ms
+     * @return 快速点击的间隔（ms），默认是1000ms
      */
     long value() default DEFAULT_INTERVAL_MILLIS;
 }

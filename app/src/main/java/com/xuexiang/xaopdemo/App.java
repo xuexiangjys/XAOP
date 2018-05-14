@@ -17,15 +17,15 @@
 package com.xuexiang.xaopdemo;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.xuexiang.xaop.XAOP;
+import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils;
 import com.xuexiang.xaop.util.Utils;
 import com.xuexiang.xutil.XUtil;
-import com.xuexiang.xutil.tip.ToastUtil;
+import com.xuexiang.xutil.tip.ToastUtils;
 
 import org.aspectj.lang.JoinPoint;
 
@@ -39,6 +39,8 @@ import java.util.List;
  * </pre>
  */
 public class App extends Application {
+
+    public static final String TRY_CATCH_KEY = "getNumber";
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,7 +58,7 @@ public class App extends Application {
              */
             @Override
             public void onDenied(List<String> permissionsDenied) {
-                ToastUtil.get().toast("权限申请被拒绝:" + Utils.listToString(permissionsDenied));
+                ToastUtils.toast("权限申请被拒绝:" + Utils.listToString(permissionsDenied));
             }
 
         });
@@ -75,6 +77,17 @@ public class App extends Application {
                         break;
                 }
                 return false;
+            }
+        });
+
+        XAOP.setIThrowableHandler(new IThrowableHandler() {
+            @Override
+            public Object handleThrowable(String flag, Throwable throwable) {
+                XLogger.d("捕获到异常，异常的flag:" + flag);
+                if (flag.equals(TRY_CATCH_KEY)) {
+                    return 100;
+                }
+                return null;
             }
         });
     }

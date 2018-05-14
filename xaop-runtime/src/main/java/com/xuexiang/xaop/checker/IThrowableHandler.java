@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.xuexiang.xaop.annotation;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.xuexiang.xaop.checker;
 
 /**
  * <pre>
- *     desc   : 申请系统权限注解
+ *     desc   : 异常的处理
  *     author : xuexiang
- *     time   : 2018/4/22 下午6:34
+ *     time   : 2018/5/14 下午11:04
  * </pre>
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD, ElementType.PARAMETER})
-public @interface Permission {
+public interface IThrowableHandler {
+
     /**
-     * @return 需要申请权限的集合
+     * 处理异常
+     * @param flag 异常的标志
+     * @param throwable 捕获到的异常
+     * @return
      */
-    String[] value();
+    Object handleThrowable(String flag, Throwable throwable);
 }

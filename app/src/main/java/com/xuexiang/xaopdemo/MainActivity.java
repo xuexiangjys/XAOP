@@ -16,8 +16,8 @@
 
 package com.xuexiang.xaopdemo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -29,12 +29,15 @@ import com.xuexiang.xaop.annotation.Intercept;
 import com.xuexiang.xaop.annotation.MainThread;
 import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.annotation.Permission;
+import com.xuexiang.xaop.annotation.Safe;
 import com.xuexiang.xaop.annotation.SingleClick;
 import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xaop.enums.ThreadType;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xutil.system.AppExecutors;
-import com.xuexiang.xutil.tip.ToastUtil;
+import com.xuexiang.xutil.tip.ToastUtils;
+
+import static com.xuexiang.xaopdemo.App.TRY_CATCH_KEY;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -68,6 +71,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_io_thread:
                 doInIOThread(v);
                 break;
+            case R.id.btn_try_catch:
+                int result = getNumber();
+                mTvHello.setText("结果为:" + result);
+                break;
             default:
                 break;
         }
@@ -84,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Intercept(3)
     public void handleOnClick(View v) {
         XLogger.e("点击响应！");
-        ToastUtil.get().toast("点击响应！");
+        ToastUtils.toast("点击响应！");
         hello("xuexiangjys", "666666");
     }
 
@@ -92,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @DebugLog(priority = Log.ERROR)
     @Intercept({1,2,3})
 //    @MemoryCache
-//    @DiskCache
+    @DiskCache
     private String hello(String name, String cardId) {
         return "hello, " + name + "! Your CardId is " + cardId + ".";
     }
@@ -110,4 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return "io线程名:" + Thread.currentThread().getName();
     }
 
+
+    @Safe(TRY_CATCH_KEY)
+    private int getNumber() {
+        return 100 / 0;
+    }
 }

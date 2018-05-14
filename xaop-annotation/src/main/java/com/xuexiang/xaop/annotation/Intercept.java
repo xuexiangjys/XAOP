@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface Intercept {
     /**
-     * 拦截类型
+     * @return 拦截类型
      */
     int[] value();
 }

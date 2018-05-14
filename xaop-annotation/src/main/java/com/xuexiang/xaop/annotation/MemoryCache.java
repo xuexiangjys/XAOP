@@ -33,8 +33,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MemoryCache {
     /**
-     * 缓存的key
-     * @return
+     * @return 内存缓存的key
      */
     String value() default "";
 }

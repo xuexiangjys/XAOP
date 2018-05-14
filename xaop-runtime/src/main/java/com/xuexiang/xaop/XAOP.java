@@ -23,6 +23,7 @@ import android.support.annotation.NonNull;
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
+import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.ILogger;
 import com.xuexiang.xaop.logger.XLogger;
@@ -50,6 +51,10 @@ public final class XAOP {
      */
     private static Interceptor sInterceptor;
 
+    /**
+     * 自定义的异常处理者接口
+     */
+    private static IThrowableHandler sIThrowableHandler;
     /**
      * 初始化
      *
@@ -101,6 +106,20 @@ public final class XAOP {
 
     public static Interceptor getInterceptor() {
         return sInterceptor;
+    }
+
+    //============自定义捕获异常处理=============//
+
+    /**
+     * 设置自定义捕获异常处理
+     * @param sIThrowableHandler 自定义捕获异常处理
+     */
+    public static void setIThrowableHandler(IThrowableHandler sIThrowableHandler) {
+        XAOP.sIThrowableHandler = sIThrowableHandler;
+    }
+
+    public static IThrowableHandler getIThrowableHandler() {
+        return sIThrowableHandler;
     }
 
     //============日志打印设置=============//
