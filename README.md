@@ -23,6 +23,8 @@
 
 * 支持磁盘缓存切片`@DiskCache`，支持自定义磁盘缓存，缓存有效时间等。
 
+* 支持自动捕获异常的拦截切片`@Safe`，支持设置自定义异常处理者。
+
 * 支持自定义拦截切片`@Intercept`，支持自定义切片拦截。
 
 * 兼容Kotlin语法。
@@ -53,7 +55,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.0'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.1'
     }
 }
 ```
@@ -65,7 +67,7 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 
 dependencies {
     ···
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.0'  //添加依赖
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'  //添加依赖
 }
 
 ```
@@ -101,6 +103,18 @@ XAOP.setInterceptor(new Interceptor() {
                 break;
         }
         return false;
+    }
+});
+
+//设置自动捕获异常的处理者
+XAOP.setIThrowableHandler(new IThrowableHandler() {
+    @Override
+    public Object handleThrowable(String flag, Throwable throwable) {
+        XLogger.d("捕获到异常，异常的flag:" + flag);
+        if (flag.equals(TRY_CATCH_KEY)) {
+            return 100;
+        }
+        return null;
     }
 });
 
@@ -249,7 +263,22 @@ private String hello(String name, String cardId) {
 
 ```
 
-### 3.8、自定义拦截切片使用
+### 3.8、自动捕获异常切片使用
+
+1.使用`@Safe`标注需要进行异常捕获的方法。可设置一个异常捕获的标志Flag，默认的Flag为当前`类名.方法名`。
+
+2.调用`XAOP.setIThrowableHandler`设置捕获异常的自定义处理者，可实现对异常的弥补处理。如果不设置的话，将只打印异常的堆栈信息。
+
+3.使用`@Safe`标注的方法,可自动进行异常捕获，并统一进行异常处理，保证方法平稳执行。
+
+```
+@Safe(TRY_CATCH_KEY)
+private int getNumber() {
+    return 100 / 0;
+}
+```
+
+### 3.9、自定义拦截切片使用
 
 1.使用`@Intercept`标注需要进行拦截的方法和类。可设置申请一个或多个拦截类型。
 
@@ -296,7 +325,7 @@ private String hello(String name, String cardId) {
 
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.0-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.1-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14

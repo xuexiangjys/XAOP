@@ -44,7 +44,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.0'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.1'
     }
 }
 ```
@@ -56,7 +56,7 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 
 dependencies {
     ···
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.0'  //添加依赖
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'  //添加依赖
 }
 
 ```
@@ -101,7 +101,7 @@ XAOP.setInterceptor(new Interceptor() {
 
 [![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.0-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.1-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
