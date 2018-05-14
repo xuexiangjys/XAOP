@@ -278,6 +278,17 @@ private String hello(String name, String cardId) {
 
 【注意】：当有多个切片注解修饰时，一般是从上至下依次顺序执行。
 
+## 4、混淆配置
+
+```
+-keep @com.xuexiang.xaop.annotation.* class * {*;}
+-keep class * {
+    @com.xuexiang.xaop.annotation.* <fields>;
+}
+-keepclassmembers class * {
+    @com.xuexiang.xaop.annotation.* <methods>;
+}
+```
 
 ## 联系方式
 

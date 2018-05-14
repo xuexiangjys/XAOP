@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# xaop
+-keep @com.xuexiang.xaop.annotation.* class * {*;}
+-keep class * {
+    @com.xuexiang.xaop.annotation.* <fields>;
+}
+-keepclassmembers class * {
+    @com.xuexiang.xaop.annotation.* <methods>;
+}
