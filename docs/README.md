@@ -1,5 +1,5 @@
 # XAOP
-一个简易的AOP(Android)应用框架。囊括了最实用的AOP应用。
+一个轻量级的AOP(Android)应用框架。囊括了最实用的AOP应用。
 
 [![xaop][xaopsvg]][xaop]  [![api][apisvg]][api]
 
