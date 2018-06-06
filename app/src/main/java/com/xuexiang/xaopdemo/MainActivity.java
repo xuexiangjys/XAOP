@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int result = getNumber();
                 mTvHello.setText("结果为:" + result);
                 break;
+            case R.id.btn_lambda:
+                AppExecutors.get().networkIO().execute(() -> doInMainThread(v));
+                break;
             default:
                 break;
         }

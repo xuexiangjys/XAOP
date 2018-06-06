@@ -15,7 +15,6 @@
  */
 
 apply plugin: 'com.android.application'
-
 apply plugin: 'com.xuexiang.xaop'
 
 android {
@@ -36,6 +35,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -44,5 +48,5 @@ dependencies {
 //    implementation project(':xaop-runtime')
     implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
 
-    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.2'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.3'
 }
