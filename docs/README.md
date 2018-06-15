@@ -39,7 +39,7 @@ allprojects {
 }
 ```
 
-2.再在项目根目录的 build.gradle 的 dependencies 添加xmark插件：
+2.再在项目根目录的 build.gradle 的 dependencies 添加xaop插件：
 
 ```
 buildscript {
