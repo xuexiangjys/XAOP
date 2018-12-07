@@ -43,23 +43,15 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-}
-
-kapt {
-    generateStubs = true
 }
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-//    implementation deps.support.app_compat
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation deps.support.app_compat
 
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.0'
-    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.2'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
 
-    kapt "com.android.databinding:compiler:3.0.1"
 }

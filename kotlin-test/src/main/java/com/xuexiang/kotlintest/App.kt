@@ -17,7 +17,9 @@
 package com.xuexiang.kotlintest
 
 import android.app.Application
+import com.xuexiang.kotlintest.MainActivity.Companion.TRY_CATCH_KEY
 import com.xuexiang.xaop.XAOP
+import com.xuexiang.xaop.checker.IThrowableHandler
 import com.xuexiang.xaop.checker.Interceptor
 import com.xuexiang.xaop.logger.XLogger
 import com.xuexiang.xaop.util.Utils
@@ -60,5 +62,12 @@ class App : Application() {
             }//做你想要的拦截
             false
         })
+
+        XAOP.setIThrowableHandler { flag, throwable ->
+            XLogger.d("捕获到异常，异常的flag:$flag")
+            if (flag == TRY_CATCH_KEY) {
+                100
+            } else null
+        }
     }
 }

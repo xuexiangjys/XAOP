@@ -16,31 +16,39 @@
 
 package com.xuexiang.kotlintest
 
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
-import com.xuexiang.kotlintest.databinding.ActivityMainBinding
-import com.xuexiang.xaop.annotation.*
+import android.widget.TextView
+import com.xuexiang.xaop.annotation.DebugLog
+import com.xuexiang.xaop.annotation.DiskCache
+import com.xuexiang.xaop.annotation.IOThread
+import com.xuexiang.xaop.annotation.Intercept
+import com.xuexiang.xaop.annotation.MainThread
+import com.xuexiang.xaop.annotation.MemoryCache
+import com.xuexiang.xaop.annotation.Permission
+import com.xuexiang.xaop.annotation.Safe
+import com.xuexiang.xaop.annotation.SingleClick
 import com.xuexiang.xaop.consts.PermissionConsts
 import com.xuexiang.xaop.enums.ThreadType
 import com.xuexiang.xaop.logger.XLogger
 import com.xuexiang.xutil.system.AppExecutors
 import com.xuexiang.xutil.tip.ToastUtils
 
-class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
 
-    /**
-     * 布局的资源id
-     *
-     * @return
-     */
-    override val layoutId: Int
-        get() = R.layout.activity_main
+    private lateinit var mTvHello: TextView
 
-    /**
-     * 绑定ViewModel
-     */
-    override fun bindViews() {
+    private val number: Int
+        @Safe(TRY_CATCH_KEY)
+        get() = 100 / 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        mTvHello = findViewById(R.id.tv_hello)
     }
 
     override fun onClick(v: View) {
@@ -49,6 +57,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
             R.id.btn_request_permission -> handleRequestPermission(v)
             R.id.btn_main_thread -> AppExecutors.get().networkIO().execute { doInMainThread(v) }
             R.id.btn_io_thread -> doInIOThread(v)
+            R.id.btn_try_catch -> {
+                val result = number
+                mTvHello.text = "结果为:$result"
+            }
+            R.id.btn_lambda -> AppExecutors.get().networkIO().execute { doInMainThread(v) }
             else -> {
             }
         }
@@ -72,16 +85,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
 
     @DebugLog(priority = Log.ERROR)
     @Intercept(1, 2, 3)
-    private//    @MemoryCache
-    //    @DiskCache
-    fun hello(name: String, cardId: String): String {
+    //    @MemoryCache
+    @DiskCache
+    private fun hello(name: String, cardId: String): String {
         return "hello, $name! Your CardId is $cardId."
     }
 
 
     @MainThread
     private fun doInMainThread(v: View) {
-        binding.tvHello.text = "工作在主线程"
+        mTvHello.text = "工作在主线程"
     }
 
     @IOThread(ThreadType.Single)
@@ -91,4 +104,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
         return "io线程名:" + Thread.currentThread().name
     }
 
+    companion object {
+        const val TRY_CATCH_KEY = "getNumber"
+    }
 }

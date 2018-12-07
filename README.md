@@ -29,6 +29,8 @@
 
 * 兼容Kotlin语法。
 
+* 支持androidx。
+
 ## 1、演示（请star支持）
 
 ![](https://github.com/xuexiangjys/XAOP/blob/master/img/aop.gif)
