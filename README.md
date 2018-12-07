@@ -67,7 +67,10 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 
 dependencies {
     ···
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'  //添加依赖
+     //添加依赖
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
+     //如果你升级到androidx，请使用下面依赖
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.1'
 }
 
 ```
