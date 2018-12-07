@@ -5,7 +5,7 @@ android {
     buildToolsVersion build_versions.build_tools
 
     defaultConfig {
-        minSdkVersion build_versions.min_sdk
+        minSdkVersion 14
         targetSdkVersion build_versions.target_sdk
     }
 
@@ -25,4 +25,4 @@ dependencies {
     implementation deps.support.app_compat
 }
 
-apply from: "https://raw.githubusercontent.com/xuexiangjys/XUtil/master/JitPackUpload.gradle"
+apply from: "../JitPackUpload.gradle"

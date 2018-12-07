@@ -19,7 +19,7 @@
 buildscript { 
     ext.kotlin_version = '1.2.30'
 
-    apply from: 'https://raw.githubusercontent.com/xuexiangjys/XUtil/master/versions.gradle'
+    apply from: './versions.gradle'
     addRepos(repositories) //增加代码仓库
     dependencies {
         classpath deps.android_gradle_plugin

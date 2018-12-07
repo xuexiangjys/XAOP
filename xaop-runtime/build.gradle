@@ -67,5 +67,5 @@ android.libraryVariants.all { variant ->
     }
 }
 
-apply from: "https://raw.githubusercontent.com/xuexiangjys/XUtil/master/JitPackUpload.gradle"
+apply from: "../JitPackUpload.gradle"
 
