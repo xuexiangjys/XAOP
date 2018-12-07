@@ -17,7 +17,6 @@
 package com.xuexiang.xaopdemo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -36,6 +35,8 @@ import com.xuexiang.xaop.enums.ThreadType;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xutil.system.AppExecutors;
 import com.xuexiang.xutil.tip.ToastUtils;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.xuexiang.xaopdemo.App.TRY_CATCH_KEY;
 

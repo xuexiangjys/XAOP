@@ -19,12 +19,11 @@ package com.xuexiang.xaop.consts;
 import android.Manifest;
 import android.Manifest.permission;
 import android.annotation.SuppressLint;
-import android.support.annotation.StringDef;
-
-import com.xuexiang.xaop.annotation.Permission;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.StringDef;
 
 /**
  * 权限相关常量

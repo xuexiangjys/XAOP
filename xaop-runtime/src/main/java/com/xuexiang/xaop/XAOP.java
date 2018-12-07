@@ -18,7 +18,6 @@ package com.xuexiang.xaop;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
@@ -29,6 +28,8 @@ import com.xuexiang.xaop.logger.ILogger;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils.OnPermissionDeniedListener;
 import com.xuexiang.xaop.util.Strings;
+
+import androidx.annotation.NonNull;
 
 /**
  * <pre>

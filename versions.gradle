@@ -4,13 +4,13 @@
 **/
 ext.deps = [:]
 def versions = [:]
-versions.android_gradle_plugin = "3.0.1"
+versions.android_gradle_plugin = "3.2.1"
 versions.android_maven_gradle_plugin = "2.0"
 versions.gradle_bintray_plugin = "1.8.0"
 versions.arch_core = "1.1.0"
 versions.room = "1.1.0-alpha1"
 versions.lifecycle = "1.1.0"
-versions.support = "27.1.1"
+versions.support = "28.0.0"
 versions.dagger = "2.11"
 versions.junit = "4.12"
 versions.espresso = "3.0.2"
@@ -151,9 +151,9 @@ deps.calligraphy = "uk.co.chrisjenx:calligraphy:$versions.calligraphy"
 ext.deps = deps
 
 def build_versions = [:]
-build_versions.min_sdk = 19
-build_versions.target_sdk = 27
-build_versions.build_tools = "27.0.3"
+build_versions.min_sdk = 14
+build_versions.target_sdk = 28
+build_versions.build_tools = "28.0.3"
 ext.build_versions = build_versions
 
 def app_release = [:]

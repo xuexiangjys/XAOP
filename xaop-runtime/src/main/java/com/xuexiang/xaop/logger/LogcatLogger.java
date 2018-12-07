@@ -16,11 +16,12 @@
 
 package com.xuexiang.xaop.logger;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import androidx.annotation.NonNull;
 
 
 /**
