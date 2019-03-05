@@ -37,6 +37,7 @@ import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xutil.system.AppExecutors;
 import com.xuexiang.xutil.tip.ToastUtils;
 
+import static com.xuexiang.xaopdemo.App.INTERCEPT_LOGIN;
 import static com.xuexiang.xaopdemo.App.TRY_CATCH_KEY;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -75,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 int result = getNumber();
                 mTvHello.setText("结果为:" + result);
                 break;
+            case R.id.btn_intercept_login:
+                doSomeThing();
+                break;
             case R.id.btn_lambda:
                 AppExecutors.get().networkIO().execute(() -> doInMainThread(v));
                 break;
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+
 
     @SingleClick
     @Permission({PermissionConsts.CALENDAR, PermissionConsts.CAMERA, PermissionConsts.LOCATION})
@@ -120,6 +126,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return "io线程名:" + Thread.currentThread().getName();
     }
 
+
+    @Intercept(INTERCEPT_LOGIN)
+    public void doSomeThing() {
+        ToastUtils.toast("已登陆过啦～～");
+    }
 
     @Safe(TRY_CATCH_KEY)
     private int getNumber() {
