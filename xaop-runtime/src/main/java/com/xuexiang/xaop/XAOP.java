@@ -23,6 +23,8 @@ import android.support.annotation.NonNull;
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
+import com.xuexiang.xaop.cache.converter.IDiskConverter;
+import com.xuexiang.xaop.cache.converter.SerializableDiskConverter;
 import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.ILogger;
@@ -45,7 +47,10 @@ public final class XAOP {
      * 权限申请被拒绝的监听
      */
     private static OnPermissionDeniedListener sOnPermissionDeniedListener;
-
+    /**
+     * 默认的磁盘序列化接口
+     */
+    private static IDiskConverter sIDiskConverter = new SerializableDiskConverter();
     /**
      * 自定义拦截切片的拦截器接口
      */
@@ -92,6 +97,20 @@ public final class XAOP {
 
     public static OnPermissionDeniedListener getOnPermissionDeniedListener() {
         return sOnPermissionDeniedListener;
+    }
+
+    //============磁盘缓存的序列化接口=============//
+    /**
+     * 设置默认的磁盘缓存的序列化接口
+     *
+     * @param sIDiskConverter
+     */
+    public static void setIDiskConverter(IDiskConverter sIDiskConverter) {
+        XAOP.sIDiskConverter = sIDiskConverter;
+    }
+
+    public static IDiskConverter getIDiskConverter() {
+        return sIDiskConverter;
     }
 
     //============自定义拦截器设置=============//
@@ -184,8 +203,9 @@ public final class XAOP {
      * @param builder
      */
     public static void initDiskCache(XCache.Builder builder) {
-        XDiskCache.getInstance().init(builder);
+        XDiskCache.getInstance().init(builder.isDiskCache(true));
     }
+
 
 
 }

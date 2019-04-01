@@ -198,8 +198,11 @@ public final class Utils {
         StringBuilder keyBuilder = new StringBuilder();
         keyBuilder.append(methodName);
         for (Object obj : joinPoint.getArgs()) {
-            if (obj instanceof String) keyBuilder.append((String) obj);
-            else if (obj instanceof Class) keyBuilder.append(((Class) obj).getSimpleName());
+            if (obj instanceof String)  {
+                keyBuilder.append("-").append((String) obj);
+            } else if (obj instanceof Class) {
+                keyBuilder.append("-").append(((Class) obj).getSimpleName());
+            }
         }
         return keyBuilder.toString();
     }

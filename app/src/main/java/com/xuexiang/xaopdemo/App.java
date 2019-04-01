@@ -23,6 +23,7 @@ import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils;
+import com.xuexiang.xaop.util.Strings;
 import com.xuexiang.xaop.util.Utils;
 import com.xuexiang.xutil.XUtil;
 import com.xuexiang.xutil.app.ActivityUtils;
@@ -101,5 +102,7 @@ public class App extends Application {
                 return null;
             }
         });
+
+//        XAOP.setIDiskConverter(new GsonDiskConverter()); //设置Gson磁盘序列化接口
     }
 }

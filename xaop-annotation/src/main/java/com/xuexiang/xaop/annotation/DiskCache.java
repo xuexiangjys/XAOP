@@ -38,7 +38,7 @@ public @interface DiskCache {
     String value() default "";
 
     /**
-     * @return 缓存时间
+     * @return 缓存时间[单位：s]，默认是永久有效
      */
     long cacheTime() default -1;
 }
