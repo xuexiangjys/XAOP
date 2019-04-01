@@ -19,9 +19,7 @@ package com.xuexiang.xaop.aspectj;
 import android.text.TextUtils;
 
 import com.xuexiang.xaop.annotation.DiskCache;
-import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.cache.XDiskCache;
-import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.Utils;
 

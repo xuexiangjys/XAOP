@@ -23,7 +23,6 @@ import android.support.annotation.NonNull;
 
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.logger.XLogger;
-import com.xuexiang.xaop.util.Strings;
 import com.xuexiang.xaop.util.Utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -32,7 +31,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.CodeSignature;
-import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.concurrent.TimeUnit;
 

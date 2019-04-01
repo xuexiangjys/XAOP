@@ -43,6 +43,10 @@ import java.util.List;
  */
 public final class Utils {
 
+    private Utils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
+
     /**
      * 根据分隔符将List转换为String
      *

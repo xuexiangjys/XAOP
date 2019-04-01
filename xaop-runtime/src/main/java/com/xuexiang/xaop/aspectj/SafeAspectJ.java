@@ -16,13 +16,11 @@
 
 package com.xuexiang.xaop.aspectj;
 
-import android.os.Looper;
 import android.text.TextUtils;
 
 import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.annotation.Safe;
 import com.xuexiang.xaop.logger.XLogger;
-import com.xuexiang.xaop.util.AppExecutors;
 import com.xuexiang.xaop.util.Utils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
