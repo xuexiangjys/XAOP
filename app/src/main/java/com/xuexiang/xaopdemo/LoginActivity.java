@@ -32,9 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
     public static boolean sIsLogined = false;
 
-
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

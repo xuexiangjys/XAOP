@@ -48,6 +48,11 @@ public class LruDiskCache extends BaseDiskCache {
      */
     private DiskLruCache mDiskLruCache;
 
+    private File mDiskDir;
+    private int mAppVersion;
+    private long mDiskMaxSize;
+
+
     /**
      * 初始化磁盘缓存
      *
@@ -58,8 +63,18 @@ public class LruDiskCache extends BaseDiskCache {
      */
     public LruDiskCache(IDiskConverter diskConverter, File diskDir, int appVersion, long diskMaxSize) {
         mDiskConverter = Utils.checkNotNull(diskConverter, "mDiskConverter ==null");
+        mDiskDir = Utils.checkNotNull(diskDir, "mDiskDir ==null");
+        mAppVersion = appVersion;
+        mDiskMaxSize = diskMaxSize;
+        openCache();
+    }
+
+    /**
+     * 打开磁盘缓存
+     */
+    private void openCache() {
         try {
-            mDiskLruCache = DiskLruCache.open(diskDir, appVersion, 1, diskMaxSize);
+            mDiskLruCache = DiskLruCache.open(mDiskDir, mAppVersion, 1, mDiskMaxSize);
         } catch (IOException e) {
             e.printStackTrace();
             XLogger.e(e);
@@ -148,6 +163,7 @@ public class LruDiskCache extends BaseDiskCache {
         boolean status = false;
         try {
             mDiskLruCache.delete();
+            openCache(); //清除缓存后需要重新打开缓存
             status = true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -163,9 +179,8 @@ public class LruDiskCache extends BaseDiskCache {
         if (existTime > CACHE_NEVER_EXPIRE) {//-1表示永久性存储 不用进行过期校验
             //为什么这么写，请了解DiskLruCache，看它的源码
             File file = new File(mDiskLruCache.getDirectory(), key + "." + 0);
-            if (isCacheDataFailure(file, existTime)) {//没有获取到缓存,或者缓存已经过期!
-                return true;
-            }
+            //没有获取到缓存,或者缓存已经过期!
+            return isCacheDataFailure(file, existTime);
         }
         return false;
     }
