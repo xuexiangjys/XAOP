@@ -30,6 +30,8 @@ import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.annotation.Permission;
 import com.xuexiang.xaop.annotation.Safe;
 import com.xuexiang.xaop.annotation.SingleClick;
+import com.xuexiang.xaop.cache.XDiskCache;
+import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.consts.PermissionConsts;
 import com.xuexiang.xaop.enums.ThreadType;
 import com.xuexiang.xaop.logger.XLogger;
@@ -38,6 +40,7 @@ import com.xuexiang.xutil.tip.ToastUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.xuexiang.xaopdemo.App.INTERCEPT_LOGIN;
 import static com.xuexiang.xaopdemo.App.TRY_CATCH_KEY;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -72,9 +75,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_io_thread:
                 doInIOThread(v);
                 break;
+            case R.id.btn_memory_cache:
+                Log.e("xuexiang", "@MemoryCache getMemoryCacheLoginInfo:" + getMemoryCacheLoginInfo());
+                break;
+            case R.id.btn_disk_cache:
+                Log.e("xuexiang", "@DiskCache getDiskCacheLoginInfo:" + getDiskCacheLoginInfo());
+//                testDiskCache1();
+//                testDiskCache2();
+//                testDiskCache3();
+//                testDiskCache4();
+//                testDiskCache5();
+                break;
+            case R.id.btn_clear_cache:
+                XMemoryCache.getInstance().clear();
+                XDiskCache.getInstance().clear();
+                break;
             case R.id.btn_try_catch:
                 int result = getNumber();
                 mTvHello.setText("结果为:" + result);
+                break;
+            case R.id.btn_intercept_login:
+                doSomeThing();
                 break;
             case R.id.btn_lambda:
                 AppExecutors.get().networkIO().execute(() -> doInMainThread(v));
@@ -83,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
 
     @SingleClick
     @Permission({PermissionConsts.CALENDAR, PermissionConsts.CAMERA, PermissionConsts.LOCATION})
@@ -121,9 +143,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return "io线程名:" + Thread.currentThread().getName();
     }
 
+    @MemoryCache
+    private LoginInfo getMemoryCacheLoginInfo() {
+        LoginInfo loginInfo = new LoginInfo().random();
+        ToastUtils.toast("执行了getMemoryCacheLoginInfo():" + loginInfo);
+        return loginInfo;
+    }
+
+    @DiskCache("LoginInfo")
+    private LoginInfo getDiskCacheLoginInfo() {
+        LoginInfo loginInfo = new LoginInfo().random();
+        ToastUtils.toast("执行了getDiskCacheLoginInfo():" + loginInfo);
+        return loginInfo;
+    }
+
+    @DiskCache
+    private int testDiskCache1() {
+        return 2;
+    }
+
+    @DiskCache
+    private String testDiskCache2() {
+        return "123";
+    }
+
+    @DiskCache
+    private int[] testDiskCache3() {
+        return new int[] {5,6,7};
+    }
+
+    @DiskCache
+    private String[] testDiskCache4() {
+        return new String[]{"234", "345"};
+    }
+
+    @DiskCache
+    private int[] testDiskCache5() {
+        return null;
+    }
+
+
+    @Intercept(INTERCEPT_LOGIN)
+    public void doSomeThing() {
+        ToastUtils.toast("已登陆过啦～～");
+    }
 
     @Safe(TRY_CATCH_KEY)
     private int getNumber() {
         return 100 / 0;
     }
+
 }

@@ -55,7 +55,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.1'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.2'
     }
 }
 ```
@@ -68,9 +68,9 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
      //添加依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.2'
      //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.1'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.2'
 }
 
 ```
@@ -132,7 +132,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
     }
 }
 ```
@@ -328,7 +328,7 @@ private String hello(String name, String cardId) {
 
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.1-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.2-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14

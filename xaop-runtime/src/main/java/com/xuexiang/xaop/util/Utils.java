@@ -20,8 +20,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
-import androidx.annotation.NonNull;
-
 import com.xuexiang.xaop.logger.XLogger;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,6 +31,8 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 /**
  * <pre>
@@ -198,8 +198,11 @@ public final class Utils {
         StringBuilder keyBuilder = new StringBuilder();
         keyBuilder.append(methodName);
         for (Object obj : joinPoint.getArgs()) {
-            if (obj instanceof String) keyBuilder.append((String) obj);
-            else if (obj instanceof Class) keyBuilder.append(((Class) obj).getSimpleName());
+            if (obj instanceof String)  {
+                keyBuilder.append("-").append((String) obj);
+            } else if (obj instanceof Class) {
+                keyBuilder.append("-").append(((Class) obj).getSimpleName());
+            }
         }
         return keyBuilder.toString();
     }

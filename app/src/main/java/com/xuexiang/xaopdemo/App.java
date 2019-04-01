@@ -25,6 +25,7 @@ import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.PermissionUtils;
 import com.xuexiang.xaop.util.Utils;
 import com.xuexiang.xutil.XUtil;
+import com.xuexiang.xutil.app.ActivityUtils;
 import com.xuexiang.xutil.tip.ToastUtils;
 
 import org.aspectj.lang.JoinPoint;
@@ -41,6 +42,9 @@ import java.util.List;
 public class App extends Application {
 
     public static final String TRY_CATCH_KEY = "getNumber";
+
+    public static final int INTERCEPT_LOGIN = 10;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -73,6 +77,13 @@ public class App extends Application {
                         break;
                     case 2:
                         return true; //return true，直接拦截切片的执行
+                    case INTERCEPT_LOGIN:
+                        if (!LoginActivity.sIsLogined) { //没登录,进行拦截
+                            ToastUtils.toast("请先进行登陆！");
+                            ActivityUtils.startActivity(LoginActivity.class);
+                            return true;
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -90,5 +101,7 @@ public class App extends Application {
                 return null;
             }
         });
+
+//        XAOP.setIDiskConverter(new GsonDiskConverter()); //设置Gson磁盘序列化接口
     }
 }

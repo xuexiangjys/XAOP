@@ -19,9 +19,7 @@ package com.xuexiang.xaop.aspectj;
 import android.text.TextUtils;
 
 import com.xuexiang.xaop.annotation.DiskCache;
-import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.cache.XDiskCache;
-import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.logger.XLogger;
 import com.xuexiang.xaop.util.Utils;
 
@@ -29,6 +27,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 
 import java.util.Collection;
 
@@ -56,33 +55,49 @@ public class DiskCacheAspectJ {
 
     @Around("method() && @annotation(diskCache)")//在连接点进行方法替换
     public Object aroundJoinPoint(ProceedingJoinPoint joinPoint, DiskCache diskCache) throws Throwable {
-        if (!Utils.isHasReturnType(joinPoint.getSignature())) return joinPoint.proceed(); //没有返回值的方法，不进行缓存处理
+        if (!Utils.isHasReturnType(joinPoint.getSignature())) {
+            return joinPoint.proceed(); //没有返回值的方法，不进行缓存处理
+        }
 
         String key = diskCache.value();
         if (TextUtils.isEmpty(key)) {
             key = Utils.getCacheKey(joinPoint);
         }
 
-        Object result = XDiskCache.getInstance().load(key, diskCache.cacheTime());
+        Object result = XDiskCache.getInstance().load(((MethodSignature) joinPoint.getSignature()).getReturnType(), key, diskCache.cacheTime());
         XLogger.dTag("DiskCache", getCacheMsg(joinPoint, key, result));
         if (result != null) return result;//缓存已有，直接返回
 
         result = joinPoint.proceed();//执行原方法
         if (result != null) {
+            //数组和字符串需要特殊处理
             if (result instanceof Collection && !((Collection) result).isEmpty() //列表不为空
                     || result instanceof String && !TextUtils.isEmpty((String) result)) { //字符不为空
-                XDiskCache.getInstance().save(key, result);//存入缓存
-                XLogger.dTag("DiskCache", "key：" + key + "--->" + "save ");
+                saveResult(key, result);
+            } else {
+                saveResult(key, result);
             }
         }
         return result;
     }
 
     /**
+     * 保存结果
+     *
+     * @param key
+     * @param result
+     */
+    private void saveResult(String key, Object result) {
+        XDiskCache.getInstance().save(key, result);//存入缓存
+        XLogger.dTag("DiskCache", "key：" + key + "--->" + "save ");
+    }
+
+    /**
      * 获取缓存信息
+     *
      * @param joinPoint
-     * @param key 缓存key
-     * @param value 缓存内容
+     * @param key       缓存key
+     * @param value     缓存内容
      * @return
      */
     private String getCacheMsg(ProceedingJoinPoint joinPoint, String key, Object value) {

@@ -21,7 +21,6 @@ import android.os.StatFs;
 
 import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.cache.converter.IDiskConverter;
-import com.xuexiang.xaop.cache.converter.SerializableDiskConverter;
 import com.xuexiang.xaop.cache.core.CacheCore;
 import com.xuexiang.xaop.cache.core.LruDiskCache;
 import com.xuexiang.xaop.cache.core.LruMemoryCache;
@@ -164,7 +163,7 @@ public class XCache {
         public Builder(Context context) {
             this.isDiskCache = false;
             this.context = context;
-            this.diskConverter = new SerializableDiskConverter();
+            this.diskConverter = XAOP.getIDiskConverter();
             this.cacheTime = LruDiskCache.CACHE_NEVER_EXPIRE;
             this.appVersion = Utils.getAppVersionCode(context);
         }
@@ -248,7 +247,7 @@ public class XCache {
         public Builder builder() {
             if (isDiskCache) { //初始化磁盘缓存的属性
                 if (this.diskConverter == null) {
-                    this.diskConverter = new SerializableDiskConverter();
+                    this.diskConverter = XAOP.getIDiskConverter();
                 }
                 if (this.diskDir == null) {
                     this.diskDir = Utils.getDiskCacheDir(this.context, "data-cache");

@@ -16,11 +16,7 @@
 
 package com.xuexiang.xaop.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * <pre>

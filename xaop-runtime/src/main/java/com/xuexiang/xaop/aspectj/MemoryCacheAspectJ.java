@@ -53,7 +53,9 @@ public class MemoryCacheAspectJ {
 
     @Around("method() && @annotation(memoryCache)")//在连接点进行方法替换
     public Object aroundJoinPoint(ProceedingJoinPoint joinPoint, MemoryCache memoryCache) throws Throwable {
-        if (!Utils.isHasReturnType(joinPoint.getSignature())) return joinPoint.proceed(); //没有返回值的方法，不进行缓存处理
+        if (!Utils.isHasReturnType(joinPoint.getSignature())) {
+            return joinPoint.proceed(); //没有返回值的方法，不进行缓存处理
+        }
 
         String key = memoryCache.value();
         if (TextUtils.isEmpty(key)) {
@@ -65,20 +67,34 @@ public class MemoryCacheAspectJ {
 
         result = joinPoint.proceed();//执行原方法
         if (result != null) {
+            //数组和字符串需要特殊处理
             if (result instanceof Collection && !((Collection) result).isEmpty() //列表不为空
                     || result instanceof String && !TextUtils.isEmpty((String) result)) { //字符不为空
-                XMemoryCache.getInstance().save(key, result);//存入缓存
-                XLogger.dTag("MemoryCache", "key：" + key + "--->" + "save ");
+                saveResult(key, result);
+            } else {
+                saveResult(key, result);
             }
         }
         return result;
     }
 
     /**
+     * 保存结果
+     *
+     * @param key
+     * @param result
+     */
+    private void saveResult(String key, Object result) {
+        XMemoryCache.getInstance().save(key, result);//存入缓存
+        XLogger.dTag("MemoryCache", "key：" + key + "--->" + "save ");
+    }
+
+    /**
      * 获取缓存信息
+     *
      * @param joinPoint
-     * @param key 缓存key
-     * @param value 缓存内容
+     * @param key       缓存key
+     * @param value     缓存内容
      * @return
      */
     private String getCacheMsg(ProceedingJoinPoint joinPoint, String key, Object value) {
