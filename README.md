@@ -57,7 +57,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.2'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.3'
     }
 }
 ```
@@ -70,9 +70,9 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
     //添加依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.2'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.3'
     //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.2'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
 }
 
 ```
@@ -134,7 +134,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.0'
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
     }
 }
 ```
@@ -232,7 +232,7 @@ private String hello(String name, String cardId) {
 
 ### 3.6、内存缓存切片使用
 
-1.使用`@MemoryCache`标注需要内存缓存的方法。可设置缓存的key，不设置的话默认key为`方法名＋参数1+参数2+...`。
+1.使用`@MemoryCache`标注需要内存缓存的方法。可设置缓存的key，不设置的话默认key为`方法名(参数1名=参数1值|参数2名=参数2值|...)`,当然你也可以修改key的自动生成规则，你只需要调用`XAOP.setICacheKeyCreator`即可。
 
 2.标注的方法一定要有返回值，否则内存缓存切片将不起作用。
 
@@ -250,7 +250,7 @@ private String hello(String name, String cardId) {
 
 ### 3.7、磁盘缓存切片使用
 
-1.使用`@DiskCache`标注需要磁盘缓存的方法。可设置缓存的key，不设置的话默认key为`方法名＋参数1+参数2+...`。
+1.使用`@DiskCache`标注需要磁盘缓存的方法。可设置缓存的key，不设置的话默认key为`方法名(参数1名=参数1值|参数2名=参数2值|...)`,当然你也可以修改key的自动生成规则，你只需要调用`XAOP.setICacheKeyCreator`即可。
 
 2.可设置磁盘缓存的有效期，单位:s。不设置的话默认永久有效。
 
@@ -330,7 +330,7 @@ private String hello(String name, String cardId) {
 
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.2-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.3-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
