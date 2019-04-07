@@ -166,13 +166,13 @@ ext.app_release = app_release
 
 //默认添加代码仓库路径
 def addRepos(RepositoryHandler handler) {
+    //Add the aliyun repository
+    handler.maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     handler.google()
     handler.jcenter()
     handler.mavenCentral()
     //Add the JitPack repository
     handler.maven { url "https://jitpack.io" }
-    //Add the aliyun repository
-    handler.maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     //Add the Local repository
     handler.maven{ url 'LocalRepository'}
 }

@@ -24,6 +24,8 @@ import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.cache.converter.IDiskConverter;
 import com.xuexiang.xaop.cache.converter.SerializableDiskConverter;
+import com.xuexiang.xaop.cache.key.DefaultCacheKeyCreator;
+import com.xuexiang.xaop.cache.key.ICacheKeyCreator;
 import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.ILogger;
@@ -53,6 +55,10 @@ public final class XAOP {
      */
     private static IDiskConverter sIDiskConverter = new SerializableDiskConverter();
     /**
+     * 缓存Key的生成器
+     */
+    private static ICacheKeyCreator sICacheKeyCreator = new DefaultCacheKeyCreator();
+    /**
      * 自定义拦截切片的拦截器接口
      */
     private static Interceptor sInterceptor;
@@ -61,6 +67,7 @@ public final class XAOP {
      * 自定义的异常处理者接口
      */
     private static IThrowableHandler sIThrowableHandler;
+
     /**
      * 初始化
      *
@@ -87,12 +94,13 @@ public final class XAOP {
     }
 
     //============动态申请权限失败事件设置=============//
+
     /**
      * 设置权限申请被拒绝的监听
      *
      * @param listener 权限申请被拒绝的监听器
      */
-    public static void setOnPermissionDeniedListener(OnPermissionDeniedListener listener) {
+    public static void setOnPermissionDeniedListener(@NonNull OnPermissionDeniedListener listener) {
         XAOP.sOnPermissionDeniedListener = listener;
     }
 
@@ -101,12 +109,13 @@ public final class XAOP {
     }
 
     //============磁盘缓存的序列化接口=============//
+
     /**
      * 设置默认的磁盘缓存的序列化接口
      *
      * @param sIDiskConverter
      */
-    public static void setIDiskConverter(IDiskConverter sIDiskConverter) {
+    public static void setIDiskConverter(@NonNull IDiskConverter sIDiskConverter) {
         XAOP.sIDiskConverter = sIDiskConverter;
     }
 
@@ -115,12 +124,13 @@ public final class XAOP {
     }
 
     //============自定义拦截器设置=============//
+
     /**
      * 设置自定义拦截切片的拦截器接口
      *
      * @param sInterceptor 自定义拦截切片的拦截器接口
      */
-    public static void setInterceptor(Interceptor sInterceptor) {
+    public static void setInterceptor(@NonNull Interceptor sInterceptor) {
         XAOP.sInterceptor = sInterceptor;
     }
 
@@ -128,13 +138,29 @@ public final class XAOP {
         return sInterceptor;
     }
 
+    //============缓存Key的生成器=============//
+
+    /**
+     * 设置缓存Key的生成器
+     *
+     * @param sICacheKeyCreator
+     */
+    public static void setICacheKeyCreator(@NonNull ICacheKeyCreator sICacheKeyCreator) {
+        XAOP.sICacheKeyCreator = sICacheKeyCreator;
+    }
+
+    public static ICacheKeyCreator getICacheKeyCreator() {
+        return sICacheKeyCreator;
+    }
+
     //============自定义捕获异常处理=============//
 
     /**
      * 设置自定义捕获异常处理
+     *
      * @param sIThrowableHandler 自定义捕获异常处理
      */
-    public static void setIThrowableHandler(IThrowableHandler sIThrowableHandler) {
+    public static void setIThrowableHandler(@NonNull IThrowableHandler sIThrowableHandler) {
         XAOP.sIThrowableHandler = sIThrowableHandler;
     }
 
@@ -143,6 +169,7 @@ public final class XAOP {
     }
 
     //============日志打印设置=============//
+
     /**
      * 设置是否打开调试
      *
@@ -175,7 +202,7 @@ public final class XAOP {
      *
      * @param sISerializer
      */
-    public static void setISerializer(Strings.ISerializer sISerializer) {
+    public static void setISerializer(@NonNull Strings.ISerializer sISerializer) {
         XLogger.setISerializer(sISerializer);
     }
 
@@ -189,6 +216,7 @@ public final class XAOP {
     }
 
     //============缓存设置=============//
+
     /**
      * 初始化内存缓存
      *
@@ -206,7 +234,6 @@ public final class XAOP {
     public static void initDiskCache(XCache.Builder builder) {
         XDiskCache.getInstance().init(builder.isDiskCache(true));
     }
-
 
 
 }

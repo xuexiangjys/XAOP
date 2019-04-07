@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                testDiskCache1();
 //                testDiskCache2();
 //                testDiskCache3();
-//                testDiskCache4();
+//                testDiskCache4((int) (Math.random() * 100), "1234");
 //                testDiskCache5();
                 break;
             case R.id.btn_clear_cache:
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @DiskCache
-    private String[] testDiskCache4() {
+    private String[] testDiskCache4(int num, String name) {
         return new String[]{"234", "345"};
     }
 
