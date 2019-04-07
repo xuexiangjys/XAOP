@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
+import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.logger.XLogger;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -190,25 +191,13 @@ public final class Utils {
 
     /**
      * 获取缓存的key
-     * <p>key规则 ： 方法名＋参数1+参数2+...</p>
      *
      * @param joinPoint
      * @return
      */
     @NonNull
     public static String getCacheKey(ProceedingJoinPoint joinPoint) {
-        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-        String methodName = methodSignature.getName();
-        StringBuilder keyBuilder = new StringBuilder();
-        keyBuilder.append(methodName);
-        for (Object obj : joinPoint.getArgs()) {
-            if (obj instanceof String)  {
-                keyBuilder.append("-").append((String) obj);
-            } else if (obj instanceof Class) {
-                keyBuilder.append("-").append(((Class) obj).getSimpleName());
-            }
-        }
-        return keyBuilder.toString();
+        return XAOP.getICacheKeyCreator().getCacheKey(joinPoint);
     }
 
     /**

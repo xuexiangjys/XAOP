@@ -20,6 +20,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.xuexiang.xaop.cache.key.DefaultCacheKeyCreator;
+import com.xuexiang.xaop.cache.key.ICacheKeyCreator;
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
@@ -51,6 +53,10 @@ public final class XAOP {
      * 默认的磁盘序列化接口
      */
     private static IDiskConverter sIDiskConverter = new SerializableDiskConverter();
+    /**
+     * 缓存Key的生成器
+     */
+    private static ICacheKeyCreator sICacheKeyCreator = new DefaultCacheKeyCreator();
     /**
      * 自定义拦截切片的拦截器接口
      */
@@ -91,7 +97,7 @@ public final class XAOP {
      *
      * @param listener 权限申请被拒绝的监听器
      */
-    public static void setOnPermissionDeniedListener(OnPermissionDeniedListener listener) {
+    public static void setOnPermissionDeniedListener(@NonNull OnPermissionDeniedListener listener) {
         XAOP.sOnPermissionDeniedListener = listener;
     }
 
@@ -105,12 +111,24 @@ public final class XAOP {
      *
      * @param sIDiskConverter
      */
-    public static void setIDiskConverter(IDiskConverter sIDiskConverter) {
+    public static void setIDiskConverter(@NonNull IDiskConverter sIDiskConverter) {
         XAOP.sIDiskConverter = sIDiskConverter;
     }
 
     public static IDiskConverter getIDiskConverter() {
         return sIDiskConverter;
+    }
+
+    //============缓存Key的生成器=============//
+    /**
+     * @param sICacheKeyCreator
+     */
+    public static void setICacheKeyCreator(@NonNull ICacheKeyCreator sICacheKeyCreator) {
+        XAOP.sICacheKeyCreator = sICacheKeyCreator;
+    }
+
+    public static ICacheKeyCreator getICacheKeyCreator() {
+        return sICacheKeyCreator;
     }
 
     //============自定义拦截器设置=============//
@@ -119,7 +137,7 @@ public final class XAOP {
      *
      * @param sInterceptor 自定义拦截切片的拦截器接口
      */
-    public static void setInterceptor(Interceptor sInterceptor) {
+    public static void setInterceptor(@NonNull Interceptor sInterceptor) {
         XAOP.sInterceptor = sInterceptor;
     }
 
@@ -133,7 +151,7 @@ public final class XAOP {
      * 设置自定义捕获异常处理
      * @param sIThrowableHandler 自定义捕获异常处理
      */
-    public static void setIThrowableHandler(IThrowableHandler sIThrowableHandler) {
+    public static void setIThrowableHandler(@NonNull IThrowableHandler sIThrowableHandler) {
         XAOP.sIThrowableHandler = sIThrowableHandler;
     }
 
@@ -174,7 +192,7 @@ public final class XAOP {
      *
      * @param sISerializer
      */
-    public static void setISerializer(Strings.ISerializer sISerializer) {
+    public static void setISerializer(@NonNull Strings.ISerializer sISerializer) {
         XLogger.setISerializer(sISerializer);
     }
 
