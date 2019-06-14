@@ -23,6 +23,8 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.TaskProvider
+import org.gradle.api.tasks.compile.JavaCompile
 
 /**
  * @使用ajc编译java代码 ， 同 时 织 入 切 片 代 码
@@ -57,7 +59,14 @@ class XAOPPlugin implements Plugin<Project> {
         log.error "========================"
 
         variants.all { variant ->
-            def javaCompile = variant.javaCompile
+            JavaCompile javaCompile = null
+            if (variant.hasProperty('javaCompileProvider')) {
+                //gradle 4.10.1 +
+                TaskProvider<JavaCompile> provider = variant.javaCompileProvider
+                javaCompile = provider.get()
+            } else {
+                javaCompile = variant.hasProperty('javaCompiler') ? variant.javaCompiler : variant.javaCompile
+            }
             javaCompile.doLast {
                 String[] args = ["-showWeaveInfo",
                                  "-1.8",
