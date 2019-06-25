@@ -1,7 +1,10 @@
 # XAOP
 一个轻量级的AOP(Android)应用框架。囊括了最实用的AOP应用。
 
-[![xaop][xaopsvg]][xaop]  [![api][apisvg]][api]
+[![](https://jitpack.io/v/xuexiangjys/XAOP.svg)](https://jitpack.io/#xuexiangjys/XAOP)
+[![api][apisvg]][api]
+[![I](https://img.shields.io/github/issues/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP/issues)
+[![Star](https://img.shields.io/github/stars/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP)
 
 ## 关于我
 
