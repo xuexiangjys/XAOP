@@ -49,4 +49,6 @@ dependencies {
     implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.4'
 
     implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
+    implementation deps.gson
+
 }
