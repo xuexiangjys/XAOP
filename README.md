@@ -61,6 +61,8 @@ buildscript {
     dependencies {
         ···
         classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.4'
+        //如果你升级到androidx，请使用下面依赖
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:x1.0.4'
     }
 }
 ```
