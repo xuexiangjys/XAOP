@@ -43,9 +43,10 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation deps.support.app_compat
-//    implementation project(':xaop-runtime')
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
+    implementation deps.androidx.appcompat
+
+    implementation project(':xaop-runtime')
+//    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.4'
     implementation deps.gson
 
     implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
