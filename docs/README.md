@@ -49,7 +49,9 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.3'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.4'
+        //如果你升级到androidx，请使用下面依赖
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:x1.0.4'    
     }
 }
 ```
@@ -62,9 +64,9 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
     //添加依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.3'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.4'
      //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.4'
 }
 ```
 4.在Application中进行初始化
@@ -108,7 +110,7 @@ XAOP.setInterceptor(new Interceptor() {
 
 [![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.3-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.4-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
