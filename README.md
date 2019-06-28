@@ -60,7 +60,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.3'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.4'
     }
 }
 ```
@@ -73,9 +73,9 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
     //添加依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.3'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.4'
     //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.4'
 }
 
 ```
@@ -333,7 +333,7 @@ private String hello(String name, String cardId) {
 
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.3-brightgreen.svg
+[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.4-brightgreen.svg
 [xaop]: https://github.com/xuexiangjys/XAOP
 [apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
 [api]: https://android-arsenal.com/api?level=14
