@@ -21,7 +21,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation deps.support.app_compat
+    compileOnly deps.androidx.appcompat
 }
 
 apply from: "../JitPackUpload.gradle"

@@ -31,14 +31,7 @@ dependencies {
 }
 
 android.libraryVariants.all { variant ->
-    JavaCompile javaCompile = null
-    if (variant.hasProperty('javaCompileProvider')) {
-        //gradle 4.10.1 +
-        TaskProvider<JavaCompile> provider =  variant.javaCompileProvider
-        javaCompile = provider.get()
-    } else {
-        javaCompile = variant.hasProperty('javaCompiler') ? variant.javaCompiler : variant.javaCompile
-    }
+    JavaCompile javaCompile = variant.javaCompile
     javaCompile.doLast {
         String[] args = [
                 "-showWeaveInfo",
