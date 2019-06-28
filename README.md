@@ -77,7 +77,7 @@ dependencies {
     //添加依赖
     implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.4'
     //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.4'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
 }
 
 ```
