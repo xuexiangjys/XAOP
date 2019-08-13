@@ -37,11 +37,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 
 /**
- * <pre>
- *     desc   :
- *     author : xuexiang
- *     time   : 2018/4/22 下午10:11
- * </pre>
+ *
+ *
+ * @author xuexiang
+ * @since 2019-08-13 23:47
  */
 public final class Utils {
 
@@ -74,6 +73,9 @@ public final class Utils {
 
 
     public static String getClassName(Class<?> cls) {
+        if (cls == null) {
+            return "<UnKnow Class>";
+        }
         if (cls.isAnonymousClass()) {
             return getClassName(cls.getEnclosingClass());
         }

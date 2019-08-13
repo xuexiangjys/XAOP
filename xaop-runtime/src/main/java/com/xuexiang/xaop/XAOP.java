@@ -36,11 +36,10 @@ import com.xuexiang.xaop.util.Strings;
 import androidx.annotation.NonNull;
 
 /**
- * <pre>
- *     desc   : XAOP
- *     author : xuexiang
- *     time   : 2018/4/22 下午8:52
- * </pre>
+ * XAOP
+ *
+ * @author xuexiang
+ * @since 2019-08-13 23:59
  */
 public final class XAOP {
 

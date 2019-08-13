@@ -301,16 +301,16 @@ public final class PermissionUtils {
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
-            if (sInstance.mThemeCallback != null) {
+            if (sInstance != null && sInstance.mThemeCallback != null) {
                 sInstance.mThemeCallback.onActivityCreate(this);
             }
             super.onCreate(savedInstanceState);
 
-            if (sInstance.rationale(this)) {
+            if (sInstance != null && sInstance.rationale(this)) {
                 finish();
                 return;
             }
-            if (sInstance.mPermissionsRequest != null) {
+            if (sInstance != null && sInstance.mPermissionsRequest != null) {
                 int size = sInstance.mPermissionsRequest.size();
                 requestPermissions(sInstance.mPermissionsRequest.toArray(new String[size]), 1);
             }
@@ -320,7 +320,9 @@ public final class PermissionUtils {
         public void onRequestPermissionsResult(int requestCode,
                                                @NonNull String[] permissions,
                                                @NonNull int[] grantResults) {
-            sInstance.onRequestPermissionsResult(this);
+            if (sInstance != null) {
+                sInstance.onRequestPermissionsResult(this);
+            }
             finish();
         }
     }
