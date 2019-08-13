@@ -77,6 +77,9 @@ public final class Utils {
 
 
     public static String getClassName(Class<?> cls) {
+        if (cls == null) {
+            return "<UnKnow Class>";
+        }
         if (cls.isAnonymousClass()) {
             return getClassName(cls.getEnclosingClass());
         }

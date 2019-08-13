@@ -35,11 +35,10 @@ import com.xuexiang.xaop.util.PermissionUtils.OnPermissionDeniedListener;
 import com.xuexiang.xaop.util.Strings;
 
 /**
- * <pre>
- *     desc   : XAOP
- *     author : xuexiang
- *     time   : 2018/4/22 下午8:52
- * </pre>
+ * XAOP
+ *
+ * @author xuexiang
+ * @since 2019-08-14 00:06
  */
 public final class XAOP {
 

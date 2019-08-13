@@ -40,11 +40,10 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * <pre>
- *     desc   : 权限相关工具类
- *     author : xuexiang
- *     time   : 2018/4/22 下午9:16
- * </pre>
+ * 权限相关工具类
+ *
+ * @author xuexiang
+ * @since 2019-08-14 00:05
  */
 public final class PermissionUtils {
 
@@ -300,16 +299,16 @@ public final class PermissionUtils {
 
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
-            if (sInstance.mThemeCallback != null) {
+            if (sInstance != null && sInstance.mThemeCallback != null) {
                 sInstance.mThemeCallback.onActivityCreate(this);
             }
             super.onCreate(savedInstanceState);
 
-            if (sInstance.rationale(this)) {
+            if (sInstance != null && sInstance.rationale(this)) {
                 finish();
                 return;
             }
-            if (sInstance.mPermissionsRequest != null) {
+            if (sInstance != null && sInstance.mPermissionsRequest != null) {
                 int size = sInstance.mPermissionsRequest.size();
                 requestPermissions(sInstance.mPermissionsRequest.toArray(new String[size]), 1);
             }
@@ -319,7 +318,9 @@ public final class PermissionUtils {
         public void onRequestPermissionsResult(int requestCode,
                                                @NonNull String[] permissions,
                                                @NonNull int[] grantResults) {
-            sInstance.onRequestPermissionsResult(this);
+            if (sInstance != null) {
+                sInstance.onRequestPermissionsResult(this);
+            }
             finish();
         }
     }
