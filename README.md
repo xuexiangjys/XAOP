@@ -2,13 +2,13 @@
 一个轻量级的AOP(Android)应用框架。囊括了最实用的AOP应用。
 
 [![](https://jitpack.io/v/xuexiangjys/XAOP.svg)](https://jitpack.io/#xuexiangjys/XAOP)
-[![api][apisvg]][api]
+[![api](https://img.shields.io/badge/API-14+-brightgreen.svg)](https://android-arsenal.com/api?level=14)
 [![I](https://img.shields.io/github/issues/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP/issues)
 [![Star](https://img.shields.io/github/stars/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP)
 
 ## 关于我
 
-[![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)
+[![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)   [![简书](https://img.shields.io/badge/简书-xuexiangjys-red.svg)](https://www.jianshu.com/u/6bf605575337)   [![掘金](https://img.shields.io/badge/掘金-xuexiangjys-brightgreen.svg)](https://juejin.im/user/598feef55188257d592e56ed)   [![知乎](https://img.shields.io/badge/知乎-xuexiangjys-violet.svg)](https://www.zhihu.com/people/xuexiangjys)
 
 ## 特点
 
@@ -58,7 +58,9 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.4'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.5'
+        //如果你升级到androidx，请使用下面依赖
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:x1.0.5'
     }
 }
 ```
@@ -71,9 +73,9 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 dependencies {
     ···
      //添加依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.4'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5'
      //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.3'
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:x1.0.5'
 }
 
 ```
@@ -325,13 +327,16 @@ private String hello(String name, String cardId) {
 }
 ```
 
+## 如果觉得项目还不错，可以考虑打赏一波
+
+> 你的打赏是我维护的动力，我将会列出所有打赏人员的清单在下方作为凭证，打赏前请留下打赏项目的备注！
+
+![](https://github.com/xuexiangjys/Resource/blob/master/img/pay/alipay.jpeg) &emsp; ![](https://github.com/xuexiangjys/Resource/blob/master/img/pay/weixinpay.jpeg)
+
+
 ## 联系方式
 
 [![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
 
 ![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
 
-[xaopsvg]: https://img.shields.io/badge/XAOP-v1.0.4-brightgreen.svg
-[xaop]: https://github.com/xuexiangjys/XAOP
-[apisvg]: https://img.shields.io/badge/API-14+-brightgreen.svg
-[api]: https://android-arsenal.com/api?level=14

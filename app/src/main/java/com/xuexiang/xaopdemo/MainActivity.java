@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SingleClick
     @Permission({PermissionConsts.CALENDAR, PermissionConsts.CAMERA, PermissionConsts.LOCATION})
     private void handleRequestPermission(View v) {
-
+        ToastUtils.toast("权限申请通过！");
     }
 
     @SingleClick(5000)
