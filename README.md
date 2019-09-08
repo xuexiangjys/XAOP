@@ -10,6 +10,12 @@
 
 [![github](https://img.shields.io/badge/GitHub-xuexiangjys-blue.svg)](https://github.com/xuexiangjys)   [![csdn](https://img.shields.io/badge/CSDN-xuexiangjys-green.svg)](http://blog.csdn.net/xuexiangjys)   [![简书](https://img.shields.io/badge/简书-xuexiangjys-red.svg)](https://www.jianshu.com/u/6bf605575337)   [![掘金](https://img.shields.io/badge/掘金-xuexiangjys-brightgreen.svg)](https://juejin.im/user/598feef55188257d592e56ed)   [![知乎](https://img.shields.io/badge/知乎-xuexiangjys-violet.svg)](https://www.zhihu.com/people/xuexiangjys)
 
+## X系列库快速集成
+
+为了方便大家快速集成X系列框架库，我提供了一个空壳模版供大家参考使用: https://github.com/xuexiangjys/TemplateAppProject
+
+---
+
 ## 特点
 
 * 支持快速点击切片`@SingleClick`，支持设置快速点击的时间间隔。
@@ -33,6 +39,9 @@
 * 兼容Kotlin语法。
 
 * 支持androidx。
+
+
+---
 
 ## 1、演示（请star支持）
 
@@ -326,6 +335,8 @@ private String hello(String name, String cardId) {
     @com.xuexiang.xaop.annotation.* <methods>;
 }
 ```
+
+---
 
 ## 如果觉得项目还不错，可以考虑打赏一波
 
