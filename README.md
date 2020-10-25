@@ -45,7 +45,7 @@
 
 ## 1、演示（请star支持）
 
-![](https://github.com/xuexiangjys/XAOP/blob/master/img/aop.gif)
+![aop.gif](https://img.rruu.net/image/5f9551baed9a7)
 
 ## 2、如何使用
 目前支持主流开发工具AndroidStudio的使用，直接配置build.gradle，增加依赖即可.
@@ -69,7 +69,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.5'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.1.0'
     }
 }
 ```
@@ -81,13 +81,14 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 
 dependencies {
     ···
-    //添加依赖
+    //如果是androidx项目，使用1.1.0版本及以上
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
+    //如果是support项目，请使用1.0.5版本
     implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5'
-    //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5x'
 }
 
 ```
+
 4.在Application中进行初始化
 
 ```
@@ -146,7 +147,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
     }
 }
 ```
@@ -155,6 +156,10 @@ buildscript {
 
 ```
 apply plugin: 'android-aspectjx' //引用aspectjx插件
+
+aspectjx {
+    include '项目的applicationId'
+}
 
 ```
 
@@ -342,10 +347,8 @@ private String hello(String name, String cardId) {
 
 > 你的打赏是我维护的动力，我将会列出所有打赏人员的清单在下方作为凭证，打赏前请留下打赏项目的备注！
 
-![](https://github.com/xuexiangjys/Resource/blob/master/img/pay/alipay.jpeg) &emsp; ![](https://github.com/xuexiangjys/Resource/blob/master/img/pay/weixinpay.jpeg)
+![pay.png](https://img.rruu.net/image/5f871d00045da)
 
 ## 联系方式
 
-[![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
-
-![](https://github.com/xuexiangjys/XPage/blob/master/img/qq_group.jpg)
+![gzh_weixin.jpg](https://img.rruu.net/image/5f871cfff3194)

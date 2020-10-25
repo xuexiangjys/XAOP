@@ -49,7 +49,7 @@ buildscript {
     ···
     dependencies {
         ···
-        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.0.5'
+        classpath 'com.github.xuexiangjys.XAOP:xaop-plugin:1.1.0'
     }
 }
 ```
@@ -61,9 +61,10 @@ apply plugin: 'com.xuexiang.xaop' //引用xaop插件
 
 dependencies {
     ···
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5'  //添加依赖
-    //如果你升级到androidx，请使用下面依赖
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5x'
+    //如果是androidx项目，使用1.1.0版本及以上
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
+    //如果是support项目，请使用1.0.5版本
+    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.5'
 }
 
 ```
@@ -102,9 +103,47 @@ XAOP.setInterceptor(new Interceptor() {
     }
 });
 
+//设置自动捕获异常的处理者
+XAOP.setIThrowableHandler(new IThrowableHandler() {
+    @Override
+    public Object handleThrowable(String flag, Throwable throwable) {
+        XLogger.d("捕获到异常，异常的flag:" + flag);
+        if (flag.equals(TRY_CATCH_KEY)) {
+            return 100;
+        }
+        return null;
+    }
+});
+
 ```
+
+## 兼容Kotlin语法配置
+
+1.在项目根目录的 build.gradle 的 dependencies 添加aspectjx插件：
+
+```
+buildscript {
+    ···
+    dependencies {
+        ···
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
+    }
+}
+```
+
+2.在项目的 build.gradle 中增加依赖并引用aspectjx插件
+
+```
+apply plugin: 'android-aspectjx' //引用aspectjx插件
+
+aspectjx {
+    include '项目的applicationId'
+}
+
+```
+
+详细使用可参见kotlin-test项目进行使用.
 
 ## 联系方式
 
-[![](https://img.shields.io/badge/点击一键加入QQ群-602082750-blue.svg)](http://shang.qq.com/wpa/qunwpa?idkey=9922861ef85c19f1575aecea0e8680f60d9386080a97ed310c971ae074998887)
-
+![gzh_weixin.jpg](https://img.rruu.net/image/5f871cfff3194)
