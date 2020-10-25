@@ -80,7 +80,7 @@ XAOP.setPriority(Log.INFO); //设置日志打印的等级,默认为0
 XAOP.setOnPermissionDeniedListener(new PermissionUtils.OnPermissionDeniedListener() {
     @Override
     public void onDenied(List<String> permissionsDenied) {
-        ToastUtil.get().toast("权限申请被拒绝:" + Utils.listToString(permissionsDenied));
+        //申请权限被拒绝的处理
     }
 
 });
