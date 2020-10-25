@@ -1,10 +1,11 @@
 # XAOP
-一个轻量级的AOP(Android)应用框架。囊括了最实用的AOP应用。
 
 [![](https://jitpack.io/v/xuexiangjys/XAOP.svg)](https://jitpack.io/#xuexiangjys/XAOP)
 [![api](https://img.shields.io/badge/API-14+-brightgreen.svg)](https://android-arsenal.com/api?level=14)
 [![Issue](https://img.shields.io/github/issues/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP/issues)
 [![Star](https://img.shields.io/github/stars/xuexiangjys/XAOP.svg)](https://github.com/xuexiangjys/XAOP)
+
+一个轻量级的AOP(Android)应用框架, 囊括了最实用的AOP应用。心动不如行动，还不赶紧点击[使用说明文档](https://github.com/xuexiangjys/XAOP/wiki)，体验一下吧！
 
 ## 关于我
 
@@ -52,7 +53,7 @@
 
 ### 2.1、Android Studio导入方法，添加Gradle依赖
 
-1.先在项目根目录的 build.gradle 的 repositories 添加:
+1.先在项目根目录的 `build.gradle` 的 repositories 添加:
 ```
 allprojects {
     repositories {
@@ -62,7 +63,7 @@ allprojects {
 }
 ```
 
-2.再在项目根目录的 build.gradle 的 dependencies 添加xaop插件：
+2.再在项目根目录的 `build.gradle` 的 dependencies 添加xaop插件：
 
 ```
 buildscript {
@@ -74,7 +75,7 @@ buildscript {
 }
 ```
 
-3.在项目的 build.gradle 中增加依赖并引用xaop插件
+3.在项目的 `build.gradle` 中增加依赖并引用`xaop`插件
 
 ```
 apply plugin: 'com.xuexiang.xaop' //引用xaop插件
@@ -140,7 +141,7 @@ XAOP.setIThrowableHandler(new IThrowableHandler() {
 
 ### 2.2、兼容Kotlin语法配置
 
-1.在项目根目录的 build.gradle 的 dependencies 添加aspectjx插件：
+1.在项目根目录的 `build.gradle` 的 dependencies 添加 [aspectjx](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx) 插件：
 
 ```
 buildscript {
@@ -152,7 +153,7 @@ buildscript {
 }
 ```
 
-2.在项目的 build.gradle 中增加依赖并引用aspectjx插件
+2.在项目的 `build.gradle` 中增加依赖并引用 [aspectjx](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx) 插件
 
 ```
 apply plugin: 'android-aspectjx' //引用aspectjx插件
