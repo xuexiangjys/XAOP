@@ -53,9 +53,7 @@ public class GsonDiskConverter implements IDiskConverter {
                 mGson = new Gson();
             }
             value = mGson.fromJson(new InputStreamReader(source), type);
-        } catch (JsonIOException e) {
-            XLogger.e(e);
-        } catch (JsonSyntaxException e) {
+        } catch (JsonIOException | JsonSyntaxException e) {
             XLogger.e(e);
         } finally {
             Utils.closeIO(source);
@@ -71,11 +69,7 @@ public class GsonDiskConverter implements IDiskConverter {
             sink.write(bytes, 0, bytes.length);
             sink.flush();
             return true;
-        } catch (JsonIOException e) {
-            XLogger.e(e);
-        } catch (JsonSyntaxException e) {
-            XLogger.e(e);
-        } catch (IOException e) {
+        } catch (JsonIOException | JsonSyntaxException | IOException e) {
             XLogger.e(e);
         } finally {
             Utils.closeIO(sink);

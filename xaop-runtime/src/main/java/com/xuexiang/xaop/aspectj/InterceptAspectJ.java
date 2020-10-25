@@ -58,7 +58,9 @@ public class InterceptAspectJ {
 
     @Around("(method() || constructor()) && @annotation(intercept)")
     public Object aroundJoinPoint(ProceedingJoinPoint joinPoint, Intercept intercept) throws Throwable {
-        if (XAOP.getInterceptor() == null) return joinPoint.proceed(); //没有拦截器不执行切片拦截
+        if (XAOP.getInterceptor() == null) {
+            return joinPoint.proceed(); //没有拦截器不执行切片拦截
+        }
         //执行拦截操作
         boolean result = proceedIntercept(intercept.value(), joinPoint);
         XLogger.d("拦截结果:" + result + ", 切片" + (result ? "被拦截！" : "正常执行！"));

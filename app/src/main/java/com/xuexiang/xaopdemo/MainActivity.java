@@ -17,10 +17,11 @@
 package com.xuexiang.xaopdemo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.annotation.DiskCache;
@@ -31,7 +32,6 @@ import com.xuexiang.xaop.annotation.MemoryCache;
 import com.xuexiang.xaop.annotation.Permission;
 import com.xuexiang.xaop.annotation.Safe;
 import com.xuexiang.xaop.annotation.SingleClick;
-import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.consts.PermissionConsts;
@@ -46,6 +46,8 @@ import static com.xuexiang.xaopdemo.App.TRY_CATCH_KEY;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView mTvHello;
+
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_disk_cache:
                 Log.e("xuexiang", "@DiskCache getDiskCacheLoginInfo:" + getDiskCacheLoginInfo());
 //                testDiskCache1();
-//                testDiskCache2();
+//                XLogger.e("testDiskCache2:" + testDiskCache2());
 //                testDiskCache3();
 //                testDiskCache4((int) (Math.random() * 100), "1234");
 //                testDiskCache5();
@@ -164,7 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @DiskCache
     private String testDiskCache2() {
-        return "123";
+        count ++;
+        if (count % 3 == 0) {
+            return "123";
+        } else {
+            return "";
+        }
     }
 
     @DiskCache

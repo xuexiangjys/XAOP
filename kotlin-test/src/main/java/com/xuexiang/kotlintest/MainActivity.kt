@@ -17,10 +17,10 @@
 package com.xuexiang.kotlintest
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.xuexiang.xaop.annotation.DebugLog
 import com.xuexiang.xaop.annotation.DiskCache
 import com.xuexiang.xaop.annotation.IOThread

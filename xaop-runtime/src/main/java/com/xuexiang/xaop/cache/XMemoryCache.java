@@ -51,7 +51,7 @@ public final class XMemoryCache {
 
     /**
      * 初始化内存缓存
-     * @param memoryMaxSize
+     * @param memoryMaxSize 内存缓存的最大数量
      * @return
      */
     public XMemoryCache init(int memoryMaxSize) {

@@ -19,7 +19,8 @@ package com.xuexiang.xaop.aspectj;
 import android.os.Build;
 import android.os.Looper;
 import android.os.Trace;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.logger.XLogger;
@@ -86,7 +87,9 @@ public class DebugLogAspectJ {
      * @param joinPoint
      */
     private void enterMethod(ProceedingJoinPoint joinPoint, DebugLog debugLog) {
-        if (!XLogger.isDebug()) return;
+        if (!XLogger.isDebug()) {
+            return;
+        }
 
         CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
 
@@ -142,7 +145,9 @@ public class DebugLogAspectJ {
      * @param lengthMillis 执行方法所需要的时间
      */
     private void exitMethod(ProceedingJoinPoint joinPoint, DebugLog debugLog, Object result, long lengthMillis) {
-        if (!XLogger.isDebug()) return;
+        if (!XLogger.isDebug()) {
+            return;
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             Trace.endSection();

@@ -63,15 +63,16 @@ public class MemoryCacheAspectJ {
         }
         Object result = XMemoryCache.getInstance().load(key);
         XLogger.dTag("MemoryCache", getCacheMsg(joinPoint, key, result));
-        if (result != null) return result;//缓存已有，直接返回
+        if (result != null) {
+            if (memoryCache.enableEmpty() || !Utils.isEmpty(result)) {
+                //缓存已有，直接返回
+                return result;
+            }
+        }
 
         result = joinPoint.proceed();//执行原方法
         if (result != null) {
-            //数组和字符串需要特殊处理
-            if (result instanceof Collection && !((Collection) result).isEmpty() //列表不为空
-                    || result instanceof String && !TextUtils.isEmpty((String) result)) { //字符不为空
-                saveResult(key, result);
-            } else {
+            if (memoryCache.enableEmpty() || !Utils.isEmpty(result)) {
                 saveResult(key, result);
             }
         }

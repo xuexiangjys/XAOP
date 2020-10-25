@@ -14,8 +14,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -25,7 +25,7 @@ android {
 
 dependencies {
     implementation 'org.aspectj:aspectjrt:1.8.9'
-    compileOnly deps.support.app_compat
+    compileOnly deps.androidx.appcompat
     //磁盘缓存的依赖包
     implementation 'com.jakewharton:disklrucache:2.0.2'
     api project(':xaop-annotation')

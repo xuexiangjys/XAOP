@@ -79,6 +79,8 @@ public class IOThreadAspectJ {
                         }
                     }).get();
                     break;
+                default:
+                    break;
             }
             XLogger.d(Utils.getMethodDescribeInfo(joinPoint) + " \u21E0 [执行结果]:" + Utils.toString(result));
             return result;

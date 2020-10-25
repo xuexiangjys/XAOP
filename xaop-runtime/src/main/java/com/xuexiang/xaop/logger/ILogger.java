@@ -17,11 +17,10 @@
 package com.xuexiang.xaop.logger;
 
 /**
- * <pre>
- *     desc   : 简易的日志记录接口
- *     author : xuexiang
- *     time   : 2018/4/22 下午7:00
- * </pre>
+ * 日志记录接口
+ *
+ * @author xuexiang
+ * @since 2020/10/25 3:34 PM
  */
 public interface ILogger {
 

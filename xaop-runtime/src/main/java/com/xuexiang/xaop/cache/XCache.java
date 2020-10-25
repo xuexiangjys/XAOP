@@ -182,7 +182,7 @@ public class XCache {
         /**
          * 设置内存缓存的最大数量
          *
-         * @param memoryMaxSize
+         * @param memoryMaxSize 内存缓存的最大数量
          * @return
          */
         public Builder memoryMaxSize(int memoryMaxSize) {
@@ -193,7 +193,7 @@ public class XCache {
         /**
          * 设置磁盘缓存的有效期（单位:s）
          *
-         * @param cacheTime
+         * @param cacheTime 磁盘缓存的有效期
          * @return
          */
         public Builder cacheTime(long cacheTime) {
@@ -212,7 +212,7 @@ public class XCache {
         /**
          * 默认磁盘缓存目录路径
          *
-         * @param directory
+         * @param directory 磁盘缓存目录路径
          * @return
          */
         public Builder diskDir(File directory) {
@@ -224,7 +224,7 @@ public class XCache {
         /**
          * 设置磁盘缓存的转化器，默认是SerializableDiskConverter
          *
-         * @param converter
+         * @param converter 磁盘缓存的转化器
          * @return
          */
         public Builder diskConverter(IDiskConverter converter) {

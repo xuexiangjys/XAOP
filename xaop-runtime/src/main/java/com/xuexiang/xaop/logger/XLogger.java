@@ -16,18 +16,18 @@
 
 package com.xuexiang.xaop.logger;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.xuexiang.xaop.util.Strings;
 
 /**
- * <pre>
- *     desc   : XLogger日志记录
- *     author : xuexiang
- *     time   : 2018/4/22 下午7:14
- * </pre>
+ * XLogger日志记录
+ *
+ * @author xuexiang
+ * @since 2020/10/25 3:33 PM
  */
 public final class XLogger {
 
@@ -42,7 +42,7 @@ public final class XLogger {
     /**
      * 默认tag
      */
-    public final static String DEFAULT_LOG_TAG = "[XLogger]";
+    public final static String DEFAULT_LOG_TAG = "[XAOP]";
     /**
      * 最大日志优先级【日志优先级为最大等级，所有日志都不打印】
      */
@@ -75,7 +75,7 @@ public final class XLogger {
     /**
      * 设置日志记录者的接口
      *
-     * @param logger
+     * @param logger 日志记录接口
      */
     public static void setLogger(@NonNull ILogger logger) {
         XLogger.sILogger = logger;
@@ -84,7 +84,7 @@ public final class XLogger {
     /**
      * 设置日志的tag
      *
-     * @param tag
+     * @param tag 日志的tag
      */
     public static void setTag(String tag) {
         XLogger.sTag = tag;
@@ -93,7 +93,7 @@ public final class XLogger {
     /**
      * 设置是否是调试模式
      *
-     * @param isDebug
+     * @param isDebug 是否是调试模式
      */
     public static void setDebug(boolean isDebug) {
         XLogger.sIsDebug = isDebug;
@@ -102,7 +102,7 @@ public final class XLogger {
     /**
      * 设置打印日志的等级（只打印改等级以上的日志）
      *
-     * @param priority
+     * @param priority 日志的等级
      */
     public static void setPriority(int priority) {
         XLogger.sLogPriority = priority;
@@ -110,7 +110,8 @@ public final class XLogger {
 
     /**
      * 设置日志打印时参数序列化的接口方法
-     * @param sISerializer
+     *
+     * @param sISerializer 参数序列化的接口方法
      */
     public static void setISerializer(Strings.ISerializer sISerializer) {
         XLogger.sISerializer = sISerializer;
@@ -157,7 +158,7 @@ public final class XLogger {
     /**
      * 打印任何（所有）信息
      *
-     * @param msg
+     * @param msg 日志信息
      */
     public static void v(String msg) {
         if (enableLog(Log.VERBOSE)) {
@@ -168,8 +169,8 @@ public final class XLogger {
     /**
      * 打印任何（所有）信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 日志信息
      */
     public static void vTag(String tag, String msg) {
         if (enableLog(Log.VERBOSE)) {
@@ -180,7 +181,7 @@ public final class XLogger {
     /**
      * 打印调试信息
      *
-     * @param msg
+     * @param msg 调试信息
      */
     public static void d(String msg) {
         if (enableLog(Log.DEBUG)) {
@@ -191,8 +192,8 @@ public final class XLogger {
     /**
      * 打印调试信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 调试信息
      */
     public static void dTag(String tag, String msg) {
         if (enableLog(Log.DEBUG)) {
@@ -203,7 +204,7 @@ public final class XLogger {
     /**
      * 打印提示性的信息
      *
-     * @param msg
+     * @param msg 提示性的信息
      */
     public static void i(String msg) {
         if (enableLog(Log.INFO)) {
@@ -214,8 +215,8 @@ public final class XLogger {
     /**
      * 打印提示性的信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 提示性的信息
      */
     public static void iTag(String tag, String msg) {
         if (enableLog(Log.INFO)) {
@@ -226,7 +227,7 @@ public final class XLogger {
     /**
      * 打印warning警告信息
      *
-     * @param msg
+     * @param msg 警告信息
      */
     public static void w(String msg) {
         if (enableLog(Log.WARN)) {
@@ -237,8 +238,8 @@ public final class XLogger {
     /**
      * 打印warning警告信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 警告信息
      */
     public static void wTag(String tag, String msg) {
         if (enableLog(Log.WARN)) {
@@ -249,7 +250,7 @@ public final class XLogger {
     /**
      * 打印出错信息
      *
-     * @param msg
+     * @param msg 出错信息
      */
     public static void e(String msg) {
         if (enableLog(Log.ERROR)) {
@@ -260,8 +261,8 @@ public final class XLogger {
     /**
      * 打印出错信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 出错信息
      */
     public static void eTag(String tag, String msg) {
         if (enableLog(Log.ERROR)) {
@@ -272,7 +273,7 @@ public final class XLogger {
     /**
      * 打印出错堆栈信息
      *
-     * @param t
+     * @param t 出错堆栈信息
      */
     public static void e(Throwable t) {
         if (enableLog(Log.ERROR)) {
@@ -283,8 +284,8 @@ public final class XLogger {
     /**
      * 打印出错堆栈信息
      *
-     * @param tag
-     * @param t
+     * @param tag tag信息
+     * @param t   出错堆栈信息
      */
     public static void eTag(String tag, Throwable t) {
         if (enableLog(Log.ERROR)) {
@@ -296,8 +297,8 @@ public final class XLogger {
     /**
      * 打印出错堆栈信息
      *
-     * @param msg
-     * @param t
+     * @param msg 出错信息
+     * @param t   出错堆栈信息
      */
     public static void e(String msg, Throwable t) {
         if (enableLog(Log.ERROR)) {
@@ -308,9 +309,9 @@ public final class XLogger {
     /**
      * 打印出错堆栈信息
      *
-     * @param tag
-     * @param msg
-     * @param t
+     * @param tag tag信息
+     * @param msg 出错堆栈信息
+     * @param t   出错堆栈信息
      */
     public static void eTag(String tag, String msg, Throwable t) {
         if (enableLog(Log.ERROR)) {
@@ -321,7 +322,7 @@ public final class XLogger {
     /**
      * 打印严重的错误信息
      *
-     * @param msg
+     * @param msg 严重的错误信息
      */
     public static void wtf(String msg) {
         if (enableLog(Log.ASSERT)) {
@@ -332,8 +333,8 @@ public final class XLogger {
     /**
      * 打印严重的错误信息
      *
-     * @param tag
-     * @param msg
+     * @param tag tag信息
+     * @param msg 严重的错误信息
      */
     public static void wtfTag(String tag, String msg) {
         if (enableLog(Log.ASSERT)) {
@@ -343,8 +344,9 @@ public final class XLogger {
 
     /**
      * 打印日志
-     * @param tag
-     * @param msg
+     *
+     * @param tag tag信息
+     * @param msg 日志信息
      */
     public static void log(int priority, String tag, String msg) {
         if (enableLog(priority)) {
@@ -355,8 +357,8 @@ public final class XLogger {
     /**
      * 能否打印
      *
-     * @param logPriority
-     * @return
+     * @param logPriority 日志等级
+     * @return 能否打印日志
      */
     private static boolean enableLog(int logPriority) {
         return isDebug() && logPriority >= sLogPriority;
@@ -364,7 +366,8 @@ public final class XLogger {
 
     /**
      * 当前是否是调试模式
-     * @return
+     *
+     * @return 是否是调试模式
      */
     public static boolean isDebug() {
         return sILogger != null && sIsDebug;

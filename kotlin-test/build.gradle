@@ -18,8 +18,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'android-aspectjx'
 apply plugin: 'com.xuexiang.xaop'
+apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -32,8 +32,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -43,15 +42,23 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+aspectjx {
+    include 'com.xuexiang.kotlintest'
 }
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation deps.support.app_compat
+    implementation deps.androidx.appcompat
 
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.0.1'
-    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.5'
+    implementation project(':xaop-runtime')
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.8'
 
 }

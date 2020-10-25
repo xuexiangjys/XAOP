@@ -20,13 +20,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.consts.PermissionConsts;
@@ -108,15 +108,6 @@ public final class PermissionUtils {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
                 || PackageManager.PERMISSION_GRANTED
                 == ContextCompat.checkSelfPermission(XAOP.getContext(), permission);
-    }
-
-    /**
-     * 打开应用具体设置
-     */
-    public static void openAppSettings() {
-        Intent intent = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
-        intent.setData(Uri.parse("package:" + XAOP.getContext().getPackageName()));
-        XAOP.getContext().startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     /**
@@ -372,19 +363,6 @@ public final class PermissionUtils {
          * 权限申请被拒绝
          */
         void onDenied(List<String> permissionsDenied);
-    }
-
-    /**
-     * 打开APP的通知权限设置界面
-     *
-     * @param activity
-     */
-    private static void openAppNotificationSettings(Activity activity) {
-        Intent intent = new Intent();
-        intent.setAction("android.settings.APP_NOTIFICATION_SETTINGS");
-        intent.putExtra("app_package", activity.getPackageName());
-        intent.putExtra("app_uid", activity.getApplicationInfo().uid);
-        activity.startActivity(intent);
     }
 
 }

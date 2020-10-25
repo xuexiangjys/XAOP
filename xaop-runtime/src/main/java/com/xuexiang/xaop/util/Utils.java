@@ -19,8 +19,16 @@ package com.xuexiang.xaop.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
-import android.support.annotation.NonNull;
+import android.util.SparseArray;
+import android.util.SparseBooleanArray;
+import android.util.SparseIntArray;
+import android.util.SparseLongArray;
+
+import androidx.annotation.NonNull;
+import androidx.collection.LongSparseArray;
+import androidx.collection.SimpleArrayMap;
 
 import com.xuexiang.xaop.XAOP;
 import com.xuexiang.xaop.logger.XLogger;
@@ -33,7 +41,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -56,7 +67,9 @@ public final class Utils {
      * @return
      */
     public static String listToString(final List<String> list, final String separator) {
-        if (list == null || list.size() == 0) return "";
+        if (list == null || list.size() == 0) {
+            return "";
+        }
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
@@ -133,7 +146,9 @@ public final class Utils {
      * @param closeables closeables
      */
     public static void closeIO(final Closeable... closeables) {
-        if (closeables == null) return;
+        if (closeables == null) {
+            return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {
@@ -212,6 +227,56 @@ public final class Utils {
     public static boolean isHasReturnType(Signature signature) {
         return signature instanceof MethodSignature
                 && ((MethodSignature) signature).getReturnType() != void.class;
+    }
+
+
+    /**
+     * 返回object是否为空
+     *
+     * @param obj The object.
+     * @return {@code true}: yes<br>{@code false}: no
+     */
+    public static boolean isEmpty(final Object obj) {
+        if (obj == null) {
+            return true;
+        }
+        if (obj.getClass().isArray() && Array.getLength(obj) == 0) {
+            return true;
+        }
+        if (obj instanceof CharSequence && obj.toString().length() == 0) {
+            return true;
+        }
+        if (obj instanceof Collection && ((Collection) obj).isEmpty()) {
+            return true;
+        }
+        if (obj instanceof Map && ((Map) obj).isEmpty()) {
+            return true;
+        }
+        if (obj instanceof SimpleArrayMap && ((SimpleArrayMap) obj).isEmpty()) {
+            return true;
+        }
+        if (obj instanceof SparseArray && ((SparseArray) obj).size() == 0) {
+            return true;
+        }
+        if (obj instanceof SparseBooleanArray && ((SparseBooleanArray) obj).size() == 0) {
+            return true;
+        }
+        if (obj instanceof SparseIntArray && ((SparseIntArray) obj).size() == 0) {
+            return true;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            if (obj instanceof SparseLongArray && ((SparseLongArray) obj).size() == 0) {
+                return true;
+            }
+        }
+        if (obj instanceof LongSparseArray && ((LongSparseArray) obj).size() == 0) {
+            return true;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            return obj instanceof android.util.LongSparseArray
+                    && ((android.util.LongSparseArray) obj).size() == 0;
+        }
+        return false;
     }
 
 }

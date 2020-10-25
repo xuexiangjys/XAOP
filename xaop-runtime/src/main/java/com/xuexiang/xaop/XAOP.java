@@ -18,15 +18,16 @@ package com.xuexiang.xaop;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
 
-import com.xuexiang.xaop.cache.key.DefaultCacheKeyCreator;
-import com.xuexiang.xaop.cache.key.ICacheKeyCreator;
+import androidx.annotation.NonNull;
+
 import com.xuexiang.xaop.cache.XCache;
 import com.xuexiang.xaop.cache.XDiskCache;
 import com.xuexiang.xaop.cache.XMemoryCache;
 import com.xuexiang.xaop.cache.converter.IDiskConverter;
 import com.xuexiang.xaop.cache.converter.SerializableDiskConverter;
+import com.xuexiang.xaop.cache.key.DefaultCacheKeyCreator;
+import com.xuexiang.xaop.cache.key.ICacheKeyCreator;
 import com.xuexiang.xaop.checker.IThrowableHandler;
 import com.xuexiang.xaop.checker.Interceptor;
 import com.xuexiang.xaop.logger.ILogger;
@@ -65,6 +66,7 @@ public final class XAOP {
      * 自定义的异常处理者接口
      */
     private static IThrowableHandler sIThrowableHandler;
+
     /**
      * 初始化
      *
@@ -91,6 +93,7 @@ public final class XAOP {
     }
 
     //============动态申请权限失败事件设置=============//
+
     /**
      * 设置权限申请被拒绝的监听
      *
@@ -105,6 +108,7 @@ public final class XAOP {
     }
 
     //============磁盘缓存的序列化接口=============//
+
     /**
      * 设置默认的磁盘缓存的序列化接口
      *
@@ -119,6 +123,7 @@ public final class XAOP {
     }
 
     //============缓存Key的生成器=============//
+
     /**
      * @param sICacheKeyCreator
      */
@@ -131,6 +136,7 @@ public final class XAOP {
     }
 
     //============自定义拦截器设置=============//
+
     /**
      * 设置自定义拦截切片的拦截器接口
      *
@@ -148,6 +154,7 @@ public final class XAOP {
 
     /**
      * 设置自定义捕获异常处理
+     *
      * @param sIThrowableHandler 自定义捕获异常处理
      */
     public static void setIThrowableHandler(@NonNull IThrowableHandler sIThrowableHandler) {
@@ -159,10 +166,11 @@ public final class XAOP {
     }
 
     //============日志打印设置=============//
+
     /**
      * 设置是否打开调试
      *
-     * @param isDebug
+     * @param isDebug 是否打开调试
      */
     public static void debug(boolean isDebug) {
         XLogger.debug(isDebug);
@@ -171,7 +179,7 @@ public final class XAOP {
     /**
      * 设置调试模式
      *
-     * @param tag
+     * @param tag tag信息
      */
     public static void debug(String tag) {
         XLogger.debug(tag);
@@ -180,7 +188,7 @@ public final class XAOP {
     /**
      * 设置打印日志的等级（只打印改等级以上的日志）
      *
-     * @param priority
+     * @param priority 日志的等级
      */
     public static void setPriority(int priority) {
         XLogger.setPriority(priority);
@@ -189,7 +197,7 @@ public final class XAOP {
     /**
      * 设置日志打印时参数序列化的接口方法
      *
-     * @param sISerializer
+     * @param sISerializer 日志打印时参数序列化的接口方法
      */
     public static void setISerializer(@NonNull Strings.ISerializer sISerializer) {
         XLogger.setISerializer(sISerializer);
@@ -198,17 +206,18 @@ public final class XAOP {
     /**
      * 设置日志记录者的接口
      *
-     * @param logger
+     * @param logger 日志记录者的接口
      */
     public static void setLogger(@NonNull ILogger logger) {
         XLogger.setLogger(logger);
     }
 
     //============缓存设置=============//
+
     /**
      * 初始化内存缓存
      *
-     * @param memoryMaxSize
+     * @param memoryMaxSize 内存缓存的最大数量
      */
     public static void initMemoryCache(int memoryMaxSize) {
         XMemoryCache.getInstance().init(memoryMaxSize);
@@ -217,12 +226,11 @@ public final class XAOP {
     /**
      * 初始化磁盘缓存
      *
-     * @param builder
+     * @param builder 缓存构造器
      */
     public static void initDiskCache(XCache.Builder builder) {
         XDiskCache.getInstance().init(builder.isDiskCache(true));
     }
-
 
 
 }
