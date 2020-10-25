@@ -163,7 +163,7 @@ aspectjx {
 
 ```
 
-详细使用可参见kotlin-test项目进行使用.
+详细使用可参见[kotlin-test](https://github.com/xuexiangjys/XAOP/blob/master/kotlin-test/build.gradle)项目进行使用.
 
 ## 3、切片的使用
 
