@@ -46,7 +46,7 @@
 
 ## 1、演示（请star支持）
 
-![aop.gif](https://img.rruu.net/image/5f9551baed9a7)
+![aop.gif](https://ss.im5i.com/2021/06/14/6TrcU.gif)
 
 ## 2、如何使用
 目前支持主流开发工具AndroidStudio的使用，直接配置build.gradle，增加依赖即可.
@@ -351,8 +351,8 @@ private String hello(String name, String cardId) {
 
 > 你的打赏是我维护的动力，我将会列出所有打赏人员的清单在下方作为凭证，打赏前请留下打赏项目的备注！
 
-![pay.png](https://img.rruu.net/image/5f871d00045da)
+![pay.png](https://ss.im5i.com/2021/06/14/6twG6.png)
 
 ## 联系方式
 
-![gzh_weixin.jpg](https://img.rruu.net/image/5f871cfff3194)
+![gzh_weixin.jpg](https://ss.im5i.com/2021/06/14/65yoL.jpg)
