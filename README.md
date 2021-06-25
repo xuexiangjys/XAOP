@@ -41,6 +41,9 @@
 
 * 支持androidx。
 
+## Star趋势图
+
+[![Stargazers over time](https://starchart.cc/xuexiangjys/XAOP.svg)](https://starchart.cc/xuexiangjys/XAOP)
 
 ---
 
