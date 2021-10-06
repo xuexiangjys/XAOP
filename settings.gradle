@@ -1,1 +1,3 @@
 include ':app', ':xaop-plugin', ':xaop-runtime', ':xaop-annotation', ':kotlin-test'
+include ':module-common-test'
+include ':module1-test'

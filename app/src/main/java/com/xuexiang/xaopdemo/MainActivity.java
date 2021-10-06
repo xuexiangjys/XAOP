@@ -16,6 +16,7 @@
 
 package com.xuexiang.xaopdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.xuexiang.module1_test.Module1Activity;
 import com.xuexiang.xaop.annotation.DebugLog;
 import com.xuexiang.xaop.annotation.DiskCache;
 import com.xuexiang.xaop.annotation.IOThread;
@@ -102,6 +104,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_lambda:
                 AppExecutors.get().networkIO().execute(() -> doInMainThread(v));
                 break;
+            case R.id.btn_module1:
+                startActivity(new Intent(this, Module1Activity.class));
+                break;
             default:
                 break;
         }
@@ -114,6 +119,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ToastUtils.toast("权限申请通过！");
     }
 
+    /**
+     * 设置5秒内响应一次点击
+     */
     @SingleClick(5000)
     @DebugLog(priority = Log.ERROR)
     @Intercept(3)

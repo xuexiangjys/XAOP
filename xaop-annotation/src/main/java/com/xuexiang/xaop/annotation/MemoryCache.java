@@ -32,6 +32,9 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface MemoryCache {
     /**
+     * 内存缓存的key，不设置的话会自动生成
+     * 默认自动生成key的规则 ： 方法名(参数1名=参数1值|参数2名=参数2值|...)
+     *
      * @return 内存缓存的key
      */
     String value() default "";

@@ -29,10 +29,30 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    if (isNeedPackage.toBoolean()) {
+        signingConfigs {
+            release {
+                storeFile file(app_release.storeFile)
+                storePassword app_release.storePassword
+                keyAlias app_release.keyAlias
+                keyPassword app_release.keyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            if (isNeedPackage.toBoolean()) {
+                signingConfig signingConfigs.release
+            }
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
         }
     }
 
@@ -51,9 +71,10 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation deps.androidx.appcompat
 //    implementation project(':xaop-runtime')
-    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
+//    implementation 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
 
-    implementation 'com.github.xuexiangjys.XUtil:xutil-core:2.0.0'
-    implementation deps.gson
+    // 这边为测试组件化测试module
+    implementation project(':module-common-test')
+    implementation project(':module1-test')
 
 }

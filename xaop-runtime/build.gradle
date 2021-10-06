@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    implementation 'org.aspectj:aspectjrt:1.8.9'
+    implementation 'org.aspectj:aspectjrt:1.9.7'
     compileOnly deps.androidx.appcompat
     //磁盘缓存的依赖包
     implementation 'com.jakewharton:disklrucache:2.0.2'
