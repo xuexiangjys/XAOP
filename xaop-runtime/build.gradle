@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion build_versions.target_sdk
+
+        consumerProguardFiles "proguard-rules.pro"
     }
 
     compileOptions {

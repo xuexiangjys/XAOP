@@ -220,18 +220,6 @@
 # xpage
 -keep class com.xuexiang.xpage.annotation.** { *; }
 
-# xaop
--keep @com.xuexiang.xaop.annotation.* class * {*;}
--keep @org.aspectj.lang.annotation.* class * {*;}
--keep class * {
-    @com.xuexiang.xaop.annotation.* <fields>;
-    @org.aspectj.lang.annotation.* <fields>;
-}
--keepclassmembers class * {
-    @com.xuexiang.xaop.annotation.* <methods>;
-    @org.aspectj.lang.annotation.* <methods>;
-}
-
 # xrouter
 -keep public class com.xuexiang.xrouter.routes.**{*;}
 -keep class * implements com.xuexiang.xrouter.facade.template.ISyringe{*;}

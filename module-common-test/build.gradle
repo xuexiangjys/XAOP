@@ -39,7 +39,8 @@ android {
 
 dependencies {
     implementation deps.androidx.appcompat
-    api 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
+    api project(':xaop-runtime')
+//    api 'com.github.xuexiangjys.XAOP:xaop-runtime:1.1.0'
     api 'com.github.xuexiangjys.XUtil:xutil-core:2.0.0'
     api deps.gson
 }

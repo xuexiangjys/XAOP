@@ -116,7 +116,6 @@ ext.app_release = app_release
 static def addRepos(RepositoryHandler handler) {
     handler.mavenLocal()
     handler.google { url 'https://maven.aliyun.com/repository/google' }
-    handler.jcenter { url 'https://maven.aliyun.com/repository/jcenter' }
     handler.mavenCentral { url 'https://maven.aliyun.com/repository/central' }
     handler.maven { url "https://jitpack.io" }
     handler.maven { url 'https://maven.aliyun.com/repository/public' }
