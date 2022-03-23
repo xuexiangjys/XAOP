@@ -54,7 +54,7 @@ buildscript {
 }
 ```
 
-3.在项目的 build.gradle 中增加依赖并引用xaop插件
+3.在应用项目(一般是app)的 `build.gradle` 中增加依赖并引用xaop插件
 
 ```
 apply plugin: 'com.xuexiang.xaop' //引用xaop插件
@@ -131,7 +131,7 @@ buildscript {
 }
 ```
 
-2.在项目的 build.gradle 中增加依赖并引用aspectjx插件
+2.在应用项目(一般是app)的 `build.gradle` 中增加依赖并引用 [aspectjx](https://github.com/HujiangTechnology/gradle_plugin_android_aspectjx) 插件
 
 ```
 apply plugin: 'android-aspectjx' //引用aspectjx插件
